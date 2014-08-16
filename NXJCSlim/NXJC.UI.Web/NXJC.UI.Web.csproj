@@ -125,8 +125,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
+    <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
     <Content Include="packages.config" />
     <Content Include="ProcessDataAnalyse\treegrid_data1.htm" />
+    <Content Include="MeterDataDisplay\combobox_data1.htm" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="Scripts\EasyUI\changelog.txt" />
@@ -500,6 +503,20 @@
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MeterDataAnalyse\CustomAnalyseItem.aspx.cs">
+      <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeterDataAnalyse\CustomAnalyseItem.aspx.designer.cs">
+      <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx.cs">
+      <DependentUpon>ProcessEnergyRealtimeDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx.designer.cs">
+      <DependentUpon>ProcessEnergyRealtimeDisplay.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProcessDataAnalyse\CustomAnalyseItem.aspx.cs">
       <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>

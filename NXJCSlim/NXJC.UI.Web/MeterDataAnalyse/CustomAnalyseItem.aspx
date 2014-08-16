@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CustomAnalyseItem.aspx.cs" Inherits="NXJC.UI.Web.ProcessDataAnalyse.CustomAnalyseItem" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CustomAnalyseItem.aspx.cs" Inherits="NXJC.UI.Web.MeterDataAnalyse.CustomAnalyseItem" %>
 
 <!DOCTYPE html>
 
@@ -76,7 +76,7 @@
 <body>
     <form id="form1" runat="server">
     <div style="width: 100%; padding-left: 3px;">
-        生产线： <input id="productLineName" class="easyui-combobox" style="width:100px"
+        分公司： <input id="productLineName" class="easyui-combobox" style="width:100px"
 			            url="data/combobox_data.json"
 			            valueField="Id" textField="Name">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="queryProductLine();">查询</a>
