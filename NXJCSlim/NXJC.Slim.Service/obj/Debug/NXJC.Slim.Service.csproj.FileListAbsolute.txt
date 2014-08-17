@@ -2,6 +2,5 @@ E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\bin\Debug\NXJC.Slim.Service.dll
 E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\bin\Debug\NXJC.Slim.Service.pdb
 E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\obj\Debug\NXJC.Slim.Service.dll
 E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\obj\Debug\NXJC.Slim.Service.pdb
-E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\obj\Debug\NXJC.Slim.Service.csprojResolveAssemblyReference.cache
 E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\bin\Debug\SqlServerDataAdapter.dll
 E:\Git\nxjcslim\NXJCSlim\NXJC.Slim.Service\bin\Debug\AutoMapper.dll
