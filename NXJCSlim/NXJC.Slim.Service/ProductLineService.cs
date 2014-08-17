@@ -1,4 +1,5 @@
 ﻿using NXJC.Slim.Service.Infrastructure;
+using SqlServerDataAdapter;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,20 +13,30 @@ namespace NXJC.Slim.Service
     {
         public static DataTable GetProductLines()
         {
-            DataSet ds = new DataSet();
+            string connectionString = ConnectionStringFactory.GetNXJCConnectionString();
 
-            using (SqlConnection connection = new SqlConnection(ConnectionStringFactory.GetNXJCConnectionString()))
-            {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM ProductLine";
+            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
+            Query query = new Query("ProductLine");
 
-                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                {
-                    adapter.Fill(ds);
-                }
-            }
+            return factory.Query(query);
+        }
 
-            return ds.Tables[0];
+        public static DataTable GetLabelsByProductLineId(int productLineId)
+        {
+            string connectionString = ConnectionStringFactory.GetByProductLineId(productLineId);
+
+            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
+            Query query = new Query("ContrastTable");
+
+            return factory.Query(query);
+        }
+
+        public static DataTable test()
+        {
+            string connectionString = "Data Source=DEC-WINSVR12;Initial Catalog=Temp;Integrated Security=SSPI;";
+            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
+            Query query = new Query("temp");
+            return factory.Query(query);
         }
     }
 }

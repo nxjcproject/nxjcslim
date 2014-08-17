@@ -25,5 +25,19 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
             DataTable productLineTable = ProductLineService.GetProductLines();
             Context.Response.Write(ComboboxJsonParser.DataTableToJson(productLineTable, "ID", "Name"));
         }
+
+        [WebMethod]
+        public void GetLabelsWithTreeGridFormat(int productLineId)
+        {
+            try
+            {
+                DataTable labelTable = ProductLineService.GetLabelsByProductLineId(productLineId);
+                Context.Response.Write(TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", "VariableName", "FieldName"));
+            }
+            catch
+            {
+                Context.Response.Write("[]");
+            }
+        }
     }
 }

@@ -20,7 +20,6 @@ namespace NXJC.Slim.Service.Infrastructure
 
         private static void DataTableToJson(StringBuilder result, StringBuilder temp, DataTable table, string idColumn, string textColumn, string relativeColumn, object parentId)
         {
-
             result.Append(temp.ToString());
             temp.Clear();
             if (table.Rows.Count > 0)

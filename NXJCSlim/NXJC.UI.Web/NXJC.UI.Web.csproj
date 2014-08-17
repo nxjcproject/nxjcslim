@@ -122,7 +122,6 @@
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.asmx" />
-    <Content Include="ProcessDataAnalyse\treegrid_data1.htm" />
     <Content Include="MeterDataDisplay\combobox_data1.htm" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.aspx" />
