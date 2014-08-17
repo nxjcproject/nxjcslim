@@ -120,6 +120,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
+    <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.asmx" />
     <Content Include="ProcessDataAnalyse\treegrid_data1.htm" />
@@ -506,6 +507,10 @@
     </Compile>
     <Compile Include="MeterDataAnalyse\CustomAnalyseItem.aspx.designer.cs">
       <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx.cs">
+      <DependentUpon>ProcessEnergyRealtimeDisplay.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx.cs">
       <DependentUpon>ProcessEnergyRealtimeDisplay.aspx</DependentUpon>
