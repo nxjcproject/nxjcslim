@@ -8,3 +8,5 @@ E:\Git\nxjcslim\NXJCSlim\NXJC.UI.Web\bin\zh-Hans\System.Web.Providers.resources.
 E:\Git\nxjcslim\NXJCSlim\NXJC.UI.Web\obj\Debug\NXJC.UI.Web.csprojResolveAssemblyReference.cache
 E:\Git\nxjcslim\NXJCSlim\NXJC.UI.Web\obj\Debug\NXJC.UI.Web.dll
 E:\Git\nxjcslim\NXJCSlim\NXJC.UI.Web\obj\Debug\NXJC.UI.Web.pdb
+E:\Git\nxjcslim\NXJCSlim\NXJC.UI.Web\bin\SqlServerDataAdapter.dll
+E:\Git\nxjcslim\NXJCSlim\NXJC.UI.Web\bin\AutoMapper.dll

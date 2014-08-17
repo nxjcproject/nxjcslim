@@ -23,7 +23,7 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
         public void GetProductLinesWithComboboxFormat()
         {
             DataTable productLineTable = ProductLineService.GetProductLines();
-            Context.Response.Write(ComboboxJsonParser.DataTableToJson(productLineTable, "VariableName", "FieldName"));
+            Context.Response.Write(ComboboxJsonParser.DataTableToJson(productLineTable, "ID", "Name"));
         }
     }
 }

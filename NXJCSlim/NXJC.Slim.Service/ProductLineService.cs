@@ -14,10 +14,10 @@ namespace NXJC.Slim.Service
         {
             DataSet ds = new DataSet();
 
-            using (SqlConnection connection = new SqlConnection(ConnectionStringFactory.GetByProductLineId(1)))
+            using (SqlConnection connection = new SqlConnection(ConnectionStringFactory.GetNXJCConnectionString()))
             {
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM ContrastTable";
+                command.CommandText = "SELECT * FROM ProductLine";
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {

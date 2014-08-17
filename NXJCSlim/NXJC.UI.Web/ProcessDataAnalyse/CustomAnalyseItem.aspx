@@ -63,7 +63,7 @@
     <form id="form1" runat="server">
     <div style="width: 100%; padding-left: 3px;">
         生产线： <input id="productLineName" class="easyui-combobox"
-                        data-options="valueField:'VariableName',textField:'FieldName',
+                        data-options="valueField:'ID',textField:'Name',
                                       url:'CustomAnalyseItem.asmx/GetProductLinesWithComboboxFormat'">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="queryProductLine();">查询</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px;float:right;" onclick="$('#w').window('open');">提交</a>
