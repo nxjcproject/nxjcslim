@@ -36,7 +36,6 @@
         // 标签已选列表双击事件
         function onLabelSelectedDoubleClicked(rowIndex, rowData) {
             $('#labelSelectedList').datagrid('deleteRow', rowIndex);
-            reasignNumberOfLabelSelectedList();
         };
 
         // 追加标签项至已选择标签列表
@@ -52,44 +51,26 @@
                 labelName: _labelName,
                 name: _name
             });
-            reasignNumberOfLabelSelectedList();
-        };
-
-        // 重新分配已选择标签项的序号
-        function reasignNumberOfLabelSelectedList() {
-            $.each($('#labelSelectedList').datagrid('getRows'), function (rowIndex) {
-                $('#labelSelectedList').datagrid('updateRow', {
-                    index: rowIndex,
-                    row: {
-                        index: rowIndex + 1
-                    }
-                });
-            });
         };
     </script>
     <style>
         body {
-            font-size: 90%;
+            font-size: 80%;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div style="width: 100%; padding-left: 3px;">
-        生产线： <input id="productLineName" class="easyui-combobox" style="width:100px"
-			            url="data/combobox_data.json"
-			            valueField="Id" textField="Name">
+        生产线： <input id="productLineName" class="easyui-combobox"
+                        data-options="valueField:'VariableName',textField:'FieldName',
+                                      url:'CustomAnalyseItem.asmx/GetProductLinesWithComboboxFormat'">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="queryProductLine();">查询</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px;float:right;" onclick="$('#w').window('open');">提交</a>
     </div>
     <div style="width: 49%; float: left; margin-top: 10px;">
-        <table id="labelSelector" title="选择分析标签" class="easyui-treegrid" style="width:100%;height:250px;"
-			    data-options="
-				    method: 'get',
-				    rownumbers: true,
-				    idField: 'id',
-				    treeField: 'name',
-			    ">
+        <table id="labelSelector" title="选择分析标签" class="easyui-treegrid" style="width:100%;height:260px;"
+			    data-options="method: 'get', rownumbers: true, idField: 'id', treeField: 'name'">
 		    <thead>
 			    <tr>
 				    <th data-options="field:'labelName'" width="220">标签名</th>
@@ -99,11 +80,10 @@
 	    </table>
     </div>
     <div style="width: 49%; float: right; margin-top: 10px;">
-	    <table id="labelSelectedList" class="easyui-datagrid" title="已选择标签项" style="width:100%;height:250px; margin-left: 10px;"
-			    data-options="singleSelect:true">
+	    <table id="labelSelectedList" class="easyui-datagrid" title="已选择标签项" style="width:100%;height:260px; margin-left: 10px;"
+			    data-options="singleSelect:true,rownumbers: true">
 		    <thead>
 			    <tr>
-				    <th data-options="field:'index',width:80">序号</th>
 				    <th data-options="field:'productLineName',width:100">生产线名称</th>
 				    <th data-options="field:'labelName',width:80,align:'right'">标签名</th>
 				    <th data-options="field:'name',width:80,align:'right'">名称</th>
