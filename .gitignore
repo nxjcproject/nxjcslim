@@ -2,13 +2,14 @@ build/
 release/
 *.suo
 *.user
-bin
-Bin
-obj
+bin/
+Bin/
+obj/
 _ReSharper*
 *.csproj.user
 *.resharper.user
 *.suo
+*.pdb
 *.cache
 TestResult.xml
 AppPackages/
