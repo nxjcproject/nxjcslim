@@ -30,7 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SqlServerDataAdapter">
+    <Reference Include="SqlServerDataAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\SqlServerDataAdapter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -47,6 +48,7 @@
     <Compile Include="Infrastructure\ConnectionStringFactory.cs" />
     <Compile Include="Infrastructure\TreeGridJsonParser.cs" />
     <Compile Include="Infrastructure\TreeJsonParser.cs" />
+    <Compile Include="MeterDataDisplayService.cs" />
     <Compile Include="ProcessDataAnalyseService.cs" />
     <Compile Include="ProductLineService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

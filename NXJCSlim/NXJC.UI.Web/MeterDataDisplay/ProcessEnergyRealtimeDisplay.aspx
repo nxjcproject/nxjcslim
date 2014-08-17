@@ -13,14 +13,18 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#companyName').combobox({
-                url: 'combobox_data1.htm',
+                url: 'ProcessEnergyRealtimeDisplay.asmx/GetFactoryNameForCombobox',
                 method: 'get',
                 onSelect: companyNameSelected
             });
         });
 
         function companyNameSelected(record) {
-            alert(record['id'] + ', ' + record['text']);
+            var factoryId = record['ID'];
+            $('#electricRoom').combobox({
+                url: 'ProcessEnergyRealtimeDisplay.asmx/GetElectricalRoomForCombobox?id=' + factoryId,
+                method: 'get'
+            });
         };
     </script>
     <style type="text/css">
@@ -33,9 +37,9 @@
     <form id="form1" runat="server">
     <div style="padding-left: 3px;">
         分公司： <input id="companyName" class="easyui-combobox"
-			                data-options="valueField:'id',textField:'text'" />
+			                data-options="valueField:'ID',textField:'Name'" />
         电气室： <input id="electricRoom" class="easyui-combobox"
-			                data-options="valueField:'id',textField:'text'" />
+			                data-options="valueField:'ID',textField:'Name'" />
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="queryProductLine();">查询</a>
     </div>
     <div style="margin-top: 10px;">
