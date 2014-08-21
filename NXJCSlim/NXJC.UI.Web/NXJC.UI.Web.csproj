@@ -522,6 +522,7 @@
     </Compile>
     <Compile Include="EnergyEfficiency\FormulaGroups.aspx.designer.cs">
       <DependentUpon>FormulaGroups.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FengGuPing\EditFengGuPing.aspx.cs">
       <DependentUpon>EditFengGuPing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
