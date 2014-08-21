@@ -119,11 +119,17 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="EnergyEfficiency\FormulaService.asmx" />
+    <Content Include="EnergyEfficiency\FormulaEditor.aspx" />
+    <Content Include="EnergyEfficiency\FormulaGroups.aspx" />
+    <Content Include="KPI\CustomKPI.aspx" />
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.asmx" />
     <Content Include="MeterDataDisplay\combobox_data1.htm" />
+    <Content Include="Scripts\knockoutjs-3.2.0.js" />
+    <Content Include="EnergyEfficiency\treegrid_data2.htm" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="Scripts\EasyUI\changelog.txt" />
@@ -484,6 +490,7 @@
     <Content Include="Scripts\EasyUI\themes\metro\tree.css" />
     <Content Include="Scripts\EasyUI\themes\metro\validatebox.css" />
     <Content Include="Scripts\EasyUI\themes\metro\window.css" />
+    <Content Include="Scripts\jquery.easyui.etreegrid.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
@@ -497,8 +504,33 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnergyEfficiency\FormulaService.asmx.cs">
+      <DependentUpon>FormulaService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EnergyEfficiency\FormulaEditor.aspx.cs">
+      <DependentUpon>FormulaEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyEfficiency\FormulaEditor.aspx.designer.cs">
+      <DependentUpon>FormulaEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnergyEfficiency\FormulaGroups.aspx.cs">
+      <DependentUpon>FormulaGroups.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyEfficiency\FormulaGroups.aspx.designer.cs">
+      <DependentUpon>FormulaGroups.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="KPI\CustomKPI.aspx.cs">
+      <DependentUpon>CustomKPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KPI\CustomKPI.aspx.designer.cs">
+      <DependentUpon>CustomKPI.aspx</DependentUpon>
     </Compile>
     <Compile Include="MeterDataAnalyse\CustomAnalyseItem.aspx.cs">
       <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>

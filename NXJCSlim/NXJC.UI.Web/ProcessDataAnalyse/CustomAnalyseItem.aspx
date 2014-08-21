@@ -5,11 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>自定义过程数据分析项</title>
     <link href="/Scripts/easyui/themes/gray/easyui.css" rel="stylesheet" />
     <link href="/Scripts/easyui/themes/icon.css" rel="stylesheet" />
     <script src="/Scripts/easyui/jquery.min.js"></script>
     <script src="/Scripts/easyui/jquery.easyui.min.js"></script>
+    <script src="/Scripts/EasyUI/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#productLineName').combobox({
@@ -22,14 +23,29 @@
         });
 
         function queryProductLine() {
-            var productLineName = $('#productLineName').combobox('getValue');
-            var queryUrl = 'CustomAnalyseItem.asmx/GetLabelsWithTreeGridFormat?productLineId=' + productLineName;
+            var productLineId = $('#productLineName').combobox('getValue');
+            var queryUrl = 'CustomAnalyseItem.asmx/GetLabelsWithTreeGridFormat';
+            var dataToSend = '{productLineId: '+ productLineId +'}';
 
-            $('#labelSelector').treegrid({
+            $.ajax({
+                type: "POST",
                 url: queryUrl,
-                onDblClickRow: onLabelDoubleClicked
+                data: dataToSend,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    initializeLabelSelector(jQuery.parseJSON(msg.d));
+                }
             });
         }
+
+        function initializeLabelSelector(jsonData) {
+            $('#labelSelector').treegrid({
+                data: jsonData,
+                dataType: "json",
+                onDblClickRow: onLabelDoubleClicked
+            });
+        };
 
         // 标签候选列表双击事件
         function onLabelDoubleClicked(row) {
@@ -72,14 +88,14 @@
     <form id="form1" runat="server">
     <div style="width: 100%; padding-left: 3px; margin-bottom: 10px;">
         生产线： <input id="productLineName" class="easyui-combobox"
-                        data-options="valueField:'ID',textField:'Name',
+                        data-options="valueField:'ID',textField:'Name', editable: false,
                                       url:'CustomAnalyseItem.asmx/GetProductLinesWithComboboxFormat'" />
         <!--<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="queryProductLine();">查询</a>-->
         <a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px;float:right;" onclick="$('#w').window('open');">提交</a>
     </div>
     <div style="width: 49%; float: left;">
         <table id="labelSelector" title="选择分析标签" class="easyui-treegrid" style="width:100%;height:260px;"
-			    data-options="method: 'get', rownumbers: true, idField: 'guid', treeField: 'VariableName'">
+			    data-options="method: 'post', rownumbers: true, idField: 'guid', treeField: 'VariableName'">
 		    <thead>
 			    <tr>
 				    <th data-options="field:'VariableName', width:220">变量名</th>

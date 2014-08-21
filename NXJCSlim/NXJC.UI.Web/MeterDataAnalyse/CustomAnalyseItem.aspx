@@ -10,6 +10,7 @@
     <link href="/Scripts/easyui/themes/icon.css" rel="stylesheet" />
     <script src="/Scripts/easyui/jquery.min.js"></script>
     <script src="/Scripts/easyui/jquery.easyui.min.js"></script>
+    <script src="/Scripts/EasyUI/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#labelSelectedList').datagrid({

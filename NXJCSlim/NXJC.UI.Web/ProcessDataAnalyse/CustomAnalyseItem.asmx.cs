@@ -27,16 +27,16 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
         }
 
         [WebMethod]
-        public void GetLabelsWithTreeGridFormat(int productLineId)
+        public string  GetLabelsWithTreeGridFormat(int productLineId)
         {
             try
             {
                 DataTable labelTable = ProductLineService.GetLabelsByProductLineId(productLineId);
-                Context.Response.Write(TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", "VariableName", "FieldName"));
+                return TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", "VariableName", "FieldName");
             }
             catch
             {
-                Context.Response.Write("[]");
+                return "[]";
             }
         }
     }

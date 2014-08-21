@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,6 +16,21 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+
+        [WebMethod]
+        public  string GetLabelsWithTreeGridFormat(int productLineId)
+        {
+            try
+            {
+                DataTable labelTable = ProductLineService.GetLabelsByProductLineId(productLineId);
+                return TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", "VariableName", "FieldName");
+            }
+            catch
+            {
+               return "[]";
+            }
         }
     }
 }
