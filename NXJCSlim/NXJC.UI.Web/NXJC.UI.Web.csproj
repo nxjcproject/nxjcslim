@@ -119,6 +119,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
@@ -497,6 +498,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FengGuPing\EditFengGuPing.aspx.cs">
+      <DependentUpon>EditFengGuPing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FengGuPing\EditFengGuPing.aspx.designer.cs">
+      <DependentUpon>EditFengGuPing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
