@@ -26,6 +26,12 @@
                 method: 'get'
             });
         };
+
+        function queryProductLine() {
+            //alert('test');
+            var electricRoomId = $('#electricRoom').combobox('getValue');
+            alert(electricRoomId);
+        };
     </script>
     <style type="text/css">
         body {

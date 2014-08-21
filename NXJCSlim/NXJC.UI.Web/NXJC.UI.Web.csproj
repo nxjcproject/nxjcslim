@@ -123,6 +123,7 @@
     <Content Include="EnergyEfficiency\FormulaEditor.aspx" />
     <Content Include="EnergyEfficiency\FormulaGroups.aspx" />
     <Content Include="KPI\CustomKPI.aspx" />
+    <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
@@ -521,6 +522,12 @@
     </Compile>
     <Compile Include="EnergyEfficiency\FormulaGroups.aspx.designer.cs">
       <DependentUpon>FormulaGroups.aspx</DependentUpon>
+    <Compile Include="FengGuPing\EditFengGuPing.aspx.cs">
+      <DependentUpon>EditFengGuPing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FengGuPing\EditFengGuPing.aspx.designer.cs">
+      <DependentUpon>EditFengGuPing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
