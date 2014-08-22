@@ -16,6 +16,9 @@
             loadGridData('first');
         });
 
+        var m_MsgData;
+        var editIndex = undefined;
+
         $.extend($.fn.datagrid.methods, {
             editCell: function (jq, param) {
                 return jq.each(function () {
@@ -37,7 +40,6 @@
             }
         });
 
-        var editIndex = undefined;
         function endEditing() {
             if (editIndex == undefined) { return true }
             if ($('#dg').datagrid('validateRow', editIndex)) {
@@ -59,11 +61,10 @@
         function loadGridData(myLoadType) {
 
             //parent.$.messager.progress({ text: '数据加载中....' });
-            var m_MsgData;
             $.ajax({
                 type: "POST",
-                url: "OnlineReportEditTemplate.aspx/GetUserInfoTemplate",
-                data: "",
+                url: "EditFengGuPing.asmx/GetFGPValueForGrid",
+                data: "{companyId: '1'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
@@ -81,7 +82,66 @@
         function InitializeGrid(myData) {
 
             $('#dg').datagrid({
-                data:myData
+                data: myData,
+                iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
+                columns: [[
+                    { field: 'StartTime', title: '起始时间', width: 150, align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
+                    { field: 'EndTime', title: '终止时间', width: 150, align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
+                    {
+                        field: 'Type', title: '类型', width: 57, align: 'center',
+                        formatter: function (value) {
+                            if (value == 0)
+                                return '峰';
+                            else if (value == 1)
+                                return '尖峰';
+                            else if (value == 2)
+                                return '谷';
+                            else if (value == 3)
+                                return '平';
+                            else
+                                return '';
+                        },
+                        editor: {
+                            type: 'combobox',
+                            options: {
+                                valueField: 'value',
+                                textField: 'label',
+                                data: [{
+                                    label: '峰',
+                                    value: 0
+                                }, {
+                                    label: '尖峰',
+                                    value: 1
+                                }, {
+                                    label: '谷',
+                                    value: 2
+                                }, {
+                                    label: '平',
+                                    value: 3
+                                }]
+                            }
+                        }
+                    },
+                    {
+                        field: 'Flag', title: '启用标志', width: 75, align: 'center',
+                        formatter: function (value) {
+                            if (value == true || value == "true")
+                                return "启用";
+                            else if (value == false || value == "false")
+                                return "禁用";
+                            else
+                                return "";
+                        },
+                        editor: { type: 'checkbox', options: { on: true, off: false } }
+                    },
+                    {
+                        field: 'action', title: '操作', width: 70, align: 'center',
+                        formatter: function (value, row, index) {
+                            var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
+                            return s;
+                        }
+                    }
+                ]]
             });
         }
 
@@ -92,11 +152,12 @@
             $('#dg').datagrid('deleteRow', index);
         }
         function saveItem() {
+            //alert('test');
             endEditing();           //关闭正在编辑
 
-            var insertRows = $('#gridMain_CellEdit').datagrid('getChanges', 'inserted');
-            var updateRows = $('#gridMain_CellEdit').datagrid('getChanges', 'updated');
-            var deleteRows = $('#gridMain_CellEdit').datagrid('getChanges', 'deleted');
+            var insertRows = $('#dg').datagrid('getChanges', 'inserted');
+            var updateRows = $('#dg').datagrid('getChanges', 'updated');
+            var deleteRows = $('#dg').datagrid('getChanges', 'deleted');
             var changesRows = {
                 inserted: [],
                 updated: [],
@@ -104,6 +165,7 @@
             };
             if (insertRows.length > 0) {
                 for (var i = 0; i < insertRows.length; i++) {
+                    insertRows[i]["CompanyID"] = m_MsgData[1]["CompanyID"];
                     changesRows.inserted.push(insertRows[i]);
                 }
             }
@@ -122,14 +184,13 @@
 
             $.ajax({
                 type: "POST",
-                url: "OnlineReportEditTemplate.aspx/ChangeDataByGrid",
+                url: "EditFengGuPing.asmx/SavePVFValues",
                 data: "{myJsonData:'" + JSON.stringify(changesRows) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
                     if (msg.d == "1") {
                         alert("更新成功!");
-                        //$('#dlg').dialog('close');
                     } else {
                         alert("更新失败!");
                     }
@@ -144,35 +205,7 @@
     </script>
 </head>
 <body>
-    <table id="dg" class="easyui-datagrid" title="Cell Editing in DataGrid" style="width:530px;height:auto"
-			data-options="iconCls: 'icon-edit',singleSelect: true,rownumbers: true,striped: true,onClickCell: onClickCell, toolbar: '#tb'">
-		<thead>
-			<tr>
-				<%--<th data-options="field:'itemid',width:80">Item ID</th>--%>
-				<th data-options="field:'startTime',width:150,align:'center',
-                    editor:{type:'textbox'}">起始时间</th>
-                <th data-options="field:'endTime',width:150,align:'center',
-                    editor:{ type:'textbox'}">终止时间</th>
-				<th data-options="field:'unitcost',width:100,align:'center',
-                    editor:{
-                        type:'combobox',
-                        options:{
-                            valueField: 'label',
-		                    textField: 'value',
-		                    data: [{
-			                    label: '峰',
-			                    value: '峰'
-		                    },{
-			                    label: '谷',
-			                    value: '谷'
-		                    },{
-			                    label: '平',
-			                    value: '平'
-		                    }]}
-                    }">类型</th>
-				<th data-options="field:'status',width:100,align:'center',editor:{type:'checkbox',options:{on:'启用',off:'禁用'}}">启用标志</th>
-			</tr>
-		</thead>
+    <table id="dg" class="easyui-datagrid" title="" style="width:530px;height:auto">
 	</table>
     <div id="tb" style="padding:5px;height:auto">
         <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">添加</a>
