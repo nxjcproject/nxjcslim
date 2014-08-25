@@ -1,4 +1,5 @@
 ﻿using NXJC.Slim.Service;
+using NXJC.Slim.Service.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace NXJC.UI.Web.SystemData
             GroupService service = new GroupService();
 
             IEnumerable<GroupTreeNode> datas = service.GetTreeGridDatas();
-            string result = JsonSerialize.JsonHelper.ObjectToJson(datas);
+            string result = JsonHelper.ObjectToJson(datas);
 
             return result;
         }

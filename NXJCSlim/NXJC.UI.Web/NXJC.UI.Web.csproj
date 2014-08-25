@@ -634,6 +634,7 @@
     <Compile Include="Working\WorkingService.asmx.cs">
       <DependentUpon>WorkingService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\CementMillProductionLineMonthlyOutput.aspx.cs">
       <DependentUpon>CementMillProductionLineMonthlyOutput.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

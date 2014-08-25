@@ -1,4 +1,4 @@
-﻿using JsonSerialize;
+﻿using NXJC.Slim.Service.Infrastructure;
 using NXJC.Slim.Service.PeakValleyFlat;
 using System;
 using System.Collections.Generic;
