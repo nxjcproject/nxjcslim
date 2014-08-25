@@ -119,18 +119,27 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="EasyUIDataGrid\EasyUIDataGridTemplate.js" />
     <Content Include="EnergyEfficiency\FormulaService.asmx" />
     <Content Include="EnergyEfficiency\FormulaEditor.aspx" />
     <Content Include="EnergyEfficiency\FormulaGroups.aspx" />
     <Content Include="FractionalPowerConsumption\Yearly.aspx" />
+    <Content Include="FengGuPing\EditFengGuPing.asmx" />
     <Content Include="KPI\CustomKPI.aspx" />
     <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
+    <Content Include="NXJCReport\CementConsumptionYearly.aspx" />
+    <Content Include="NXJCReport\CementMillConsumptionMonthly.aspx" />
+    <Content Include="NXJCReport\ClinkerConsumptionYearly.aspx" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.asmx" />
     <Content Include="MeterDataDisplay\combobox_data1.htm" />
     <Content Include="Scripts\jquery.utility.js" />
+    <Content Include="Report\CementMillProductionLineMonthlyOutput.aspx" />
+    <Content Include="Report\ClinkerProductionLineMonthlyElectricityConsumption.aspx" />
+    <Content Include="Report\ClinkerProductionLineMonthlyOutput.aspx" />
+    <Content Include="Report\ConsumptionMonthlyCoalDust.aspx" />
     <Content Include="Scripts\knockoutjs-3.2.0.js" />
     <Content Include="Working\HandoverLoger.aspx" />
     <Content Include="Working\HandoverLogQuerying.aspx" />
@@ -504,11 +513,13 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="SystemData\GroupInformation.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EasyUIDataGrid\DataGridTemplateHelper.cs" />
     <Compile Include="EnergyEfficiency\FormulaService.asmx.cs">
       <DependentUpon>FormulaService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -526,6 +537,10 @@
     </Compile>
     <Compile Include="EnergyEfficiency\FormulaGroups.aspx.designer.cs">
       <DependentUpon>FormulaGroups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FengGuPing\EditFengGuPing.asmx.cs">
+      <DependentUpon>EditFengGuPing.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="FengGuPing\EditFengGuPing.aspx.cs">
       <DependentUpon>EditFengGuPing.aspx</DependentUpon>
@@ -569,6 +584,27 @@
     <Compile Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx.designer.cs">
       <DependentUpon>ProcessEnergyRealtimeDisplay.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NXJCReport\CementConsumptionYearly.aspx.cs">
+      <DependentUpon>CementConsumptionYearly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NXJCReport\CementConsumptionYearly.aspx.designer.cs">
+      <DependentUpon>CementConsumptionYearly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NXJCReport\CementMillConsumptionMonthly.aspx.cs">
+      <DependentUpon>CementMillConsumptionMonthly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NXJCReport\CementMillConsumptionMonthly.aspx.designer.cs">
+      <DependentUpon>CementMillConsumptionMonthly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NXJCReport\ClinkerConsumptionYearly.aspx.cs">
+      <DependentUpon>ClinkerConsumptionYearly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NXJCReport\ClinkerConsumptionYearly.aspx.designer.cs">
+      <DependentUpon>ClinkerConsumptionYearly.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProcessDataAnalyse\CustomAnalyseItem.asmx.cs">
       <DependentUpon>CustomAnalyseItem.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -598,6 +634,40 @@
     <Compile Include="Working\WorkingService.asmx.cs">
       <DependentUpon>WorkingService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    <Compile Include="Report\CementMillProductionLineMonthlyOutput.aspx.cs">
+      <DependentUpon>CementMillProductionLineMonthlyOutput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\CementMillProductionLineMonthlyOutput.aspx.designer.cs">
+      <DependentUpon>CementMillProductionLineMonthlyOutput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ClinkerProductionLineMonthlyElectricityConsumption.aspx.cs">
+      <DependentUpon>ClinkerProductionLineMonthlyElectricityConsumption.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ClinkerProductionLineMonthlyElectricityConsumption.aspx.designer.cs">
+      <DependentUpon>ClinkerProductionLineMonthlyElectricityConsumption.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ClinkerProductionLineMonthlyOutput.aspx.cs">
+      <DependentUpon>ClinkerProductionLineMonthlyOutput.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ClinkerProductionLineMonthlyOutput.aspx.designer.cs">
+      <DependentUpon>ClinkerProductionLineMonthlyOutput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ConsumptionMonthlyCoalDust.aspx.cs">
+      <DependentUpon>ConsumptionMonthlyCoalDust.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ConsumptionMonthlyCoalDust.aspx.designer.cs">
+      <DependentUpon>ConsumptionMonthlyCoalDust.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemData\GroupInformation.aspx.cs">
+      <DependentUpon>GroupInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemData\GroupInformation.aspx.designer.cs">
+      <DependentUpon>GroupInformation.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -605,6 +675,7 @@
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SystemData\treegrid_data1.htm" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

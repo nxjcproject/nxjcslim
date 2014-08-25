@@ -41,6 +41,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionService.cs" />
+    <Compile Include="GroupService.cs" />
     <Compile Include="Infrastructure\ComboboxJsonParser.cs" />
     <Compile Include="Infrastructure\ConnectionStringFactory.cs" />
     <Compile Include="Infrastructure\DataGridJsonParser.cs" />
@@ -57,6 +59,9 @@
     <Compile Include="Infrastructure\TreeJsonParser.cs" />
     <Compile Include="MachineHaltLogService.cs" />
     <Compile Include="MeterDataDisplayService.cs" />
+    <Compile Include="PeakValleyFlat\PVFChanges.cs" />
+    <Compile Include="PeakValleyFlat\PVFItem.cs" />
+    <Compile Include="PeakValleyFlat\PVFService.cs" />
     <Compile Include="ProcessDataAnalyseService.cs" />
     <Compile Include="ProductLineService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
