@@ -85,10 +85,10 @@
                 data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
-                    { field: 'StartTime', title: '起始时间', width: 150, align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
-                    { field: 'EndTime', title: '终止时间', width: 150, align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
+                    { field: 'StartTime', title: '起始时间', width:'20%', align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
+                    { field: 'EndTime', title: '终止时间', width:'20%', align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
                     {
-                        field: 'Type', title: '类型', width: 57, align: 'center',
+                        field: 'Type', title: '类型', width:'20%', align: 'center',
                         formatter: function (value) {
                             if (value == 0)
                                 return '峰';
@@ -123,7 +123,7 @@
                         }
                     },
                     {
-                        field: 'Flag', title: '启用标志', width: 75, align: 'center',
+                        field: 'Flag', title: '启用标志', width:'20%', align: 'center',
                         formatter: function (value) {
                             if (value == true || value == "true")
                                 return "启用";
@@ -135,7 +135,7 @@
                         editor: { type: 'checkbox', options: { on: true, off: false } }
                     },
                     {
-                        field: 'action', title: '操作', width: 70, align: 'center',
+                        field: 'action', title: '操作', width:'19%', align: 'center',
                         formatter: function (value, row, index) {
                             var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
                             return s;
@@ -205,7 +205,7 @@
     </script>
 </head>
 <body>
-    <table id="dg" class="easyui-datagrid" title="" style="width:530px;height:auto">
+    <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:auto">
 	</table>
     <div id="tb" style="padding:5px;height:auto">
         <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">添加</a>

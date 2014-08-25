@@ -509,6 +509,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="SystemData\GroupInformation.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -633,12 +634,20 @@
     <Compile Include="Report\ConsumptionMonthlyCoalDust.aspx.designer.cs">
       <DependentUpon>ConsumptionMonthlyCoalDust.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SystemData\GroupInformation.aspx.cs">
+      <DependentUpon>GroupInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemData\GroupInformation.aspx.designer.cs">
+      <DependentUpon>GroupInformation.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SystemData\treegrid_data1.htm" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
