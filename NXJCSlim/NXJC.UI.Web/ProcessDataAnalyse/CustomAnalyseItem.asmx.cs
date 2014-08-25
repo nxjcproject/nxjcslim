@@ -32,7 +32,7 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
             try
             {
                 DataTable labelTable = ProductLineService.GetLabelsByProductLineId(productLineId);
-                return TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", "VariableName", "FieldName");
+                return TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", new string[] { "VariableName", "FieldName" });
             }
             catch
             {

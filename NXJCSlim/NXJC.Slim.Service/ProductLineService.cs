@@ -21,6 +21,11 @@ namespace NXJC.Slim.Service
             return factory.Query(query);
         }
 
+        /// <summary>
+        /// 按生产线ID获取标签
+        /// </summary>
+        /// <param name="productLineId"></param>
+        /// <returns></returns>
         public static DataTable GetLabelsByProductLineId(int productLineId)
         {
             string connectionString = ConnectionStringFactory.GetByProductLineId(productLineId);
@@ -31,12 +36,5 @@ namespace NXJC.Slim.Service
             return factory.Query(query);
         }
 
-        public static DataTable test()
-        {
-            string connectionString = "Data Source=DEC-WINSVR12;Initial Catalog=Temp;Integrated Security=SSPI;";
-            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
-            Query query = new Query("temp");
-            return factory.Query(query);
-        }
     }
 }

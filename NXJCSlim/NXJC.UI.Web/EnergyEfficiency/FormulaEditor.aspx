@@ -12,6 +12,7 @@
     <script src="/Scripts/easyui/jquery.min.js"></script>
     <script src="/Scripts/easyui/jquery.easyui.min.js"></script>
     <script src="/Scripts/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.utility.js"></script>
     <style>
         body {
             font-size: 80%;
@@ -26,33 +27,33 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-	<div style="margin:20px 0;">
-        <a href="javascript:void(0)" class="easyui-linkbutton easyui-tooltip tooltip-f" data-options="iconCls:'icon-reload'" title="从其他公式组载入。" onclick="$('#dlg').dialog('open')">载入</a> | 
-		名称：<input id="vv" class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,50]'" /> | 
+	<div id="wrapper" class="easyui-panel" style="width:98%;height:auto;padding:2px;">
+	<div class="easyui-panel" style="width:100%;padding:5px;">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="javascript:history.go(-1);">返回</a> | 
+        <a href="javascript:void(0)" class="easyui-linkbutton easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-reload'" title="从其他公式组载入。" onclick="$('#dlg').dialog('open')">载入</a> 
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="appendRoot()">添加根工序</a> | 
+		名称：<input id="formulaGroupName" class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,50]'" /> | 
 
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="">暂存</a> | 
-        <a href="javascript:void(0)" class="easyui-linkbutton c4 easyui-tooltip tooltip-f" data-options="iconCls:'icon-ok'" title="提交后不可修改，请谨慎操作。" onclick="">提交</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="temporarySave()">暂存</a> | 
+        <a href="javascript:void(0)" class="easyui-linkbutton c4 easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-ok'" title="提交后不可修改，请谨慎操作。" onclick="">提交</a>
 	</div>
-	<table id="tg" class="easyui-treegrid" title="公式录入" style="width:100%;height:250px"
+	<table id="formulaEditor" class="easyui-treegrid" title="公式录入" style="width:100%;height:450px"
 			data-options="
 				iconCls: 'icon-edit',
 				rownumbers: true,
 				animate: true,
 				fitColumns: true,
-				url: 'treegrid_data2.htm',
-				method: 'get',
-				idField: 'id',
-				treeField: 'name',
+				idField: 'LevelCode',
+				treeField: 'Name',
 				onContextMenu: onContextMenu,
                 onDblClickRow: edit,
                 onClickRow: save
 			">
 		<thead>
 			<tr>
-                <th data-options="field:'id',width:50">层次码</th>
-				<th data-options="field:'name',width:180,editor:'text'">工序名称</th>
-				<th data-options="field:'progress',width:180,formatter:formatProgress,editor:'text'">公式</th>
+                <th data-options="field:'LevelCode',width:50">层次码</th>
+				<th data-options="field:'Name',width:180,editor:'text'">工序名称</th>
+				<th data-options="field:'Formula',width:180,formatter:formatFormula,editor:'text'">公式</th>
 			</tr>
 		</thead>
 	</table>
@@ -72,14 +73,14 @@
             modal:true,
             closed:true
         " >
-	    <table class="easyui-datagrid" style="width:100%;height:100%"
-			    data-options="singleSelect:true,url:'datagrid_data1.json',method:'get'">
+	    <table id="formulaGroups" class="easyui-datagrid" style="width:100%;height:100%"
+			    data-options="singleSelect:true">
 		    <thead>
 			    <tr>
-				    <th data-options="field:'itemid',hidden:true">Item ID</th>
-				    <th data-options="field:'productid',width:260">公式组名称</th>
-				    <th data-options="field:'listprice',width:100">创建时间</th>
-				    <th data-options="field:'status',width:100,align:'center'">状态</th>
+				    <th data-options="field:'KeyID',hidden:true"></th>
+				    <th data-options="field:'Name',width:260">公式组名称</th>
+				    <th data-options="field:'CreateDate',width:100">创建时间</th>
+				    <th data-options="field:'State',width:100,align:'center'">状态</th>
 			    </tr>
 		    </thead>
 	    </table>
@@ -87,7 +88,7 @@
 
 
 	<script type="text/javascript">
-	    function formatProgress(value) {
+	    function formatFormula(value) {
 	        var validateResult = validateExpression(value);
 	        
 	        if (validateResult == "success") {
@@ -103,69 +104,117 @@
 	    }
 	    function onContextMenu(e, row) {
 	        e.preventDefault();
-	        $(this).treegrid('select', row.id);
+	        $(this).treegrid('select', row.LevelCode);
 	        $('#mm').menu('show', {
 	            left: e.pageX,
 	            top: e.pageY
 	        });
 	    }
-	    var idIndex = 100;
+
 	    function appendRoot() {
-	        idIndex++;
-	        $('#tg').treegrid('append', {
+	        var levelCode = getAppendRootLevelCode();
+	        $('#formulaEditor').treegrid('append', {
 	            data: [{
-	                id: idIndex,
-	                name: '请输入工序名称：' + idIndex,
-	                progress: ''
+	                LevelCode: levelCode,
+	                Name: '新工序',
+	                Formula: ''
 	            }]
 	        })
 	    }
 	    function append() {
-	        idIndex++;
-	        var node = $('#tg').treegrid('getSelected');
-	        $('#tg').treegrid('append', {
-	            parent: node.id,
+	        var node = $('#formulaEditor').treegrid('getSelected');
+	        var levelCode = getAppendLevelCode(node.LevelCode);
+	        $('#formulaEditor').treegrid('append', {
+	            parent: node.LevelCode,
 	            data: [{
-	                id: idIndex,
-	                name: '新工序',
-	                progress: ''
+	                LevelCode: levelCode,
+	                Name: '新工序',
+	                Formula: ''
 	            }]
 	        })
 	    }
 	    function removeIt() {
-	        var node = $('#tg').treegrid('getSelected');
+	        var node = $('#formulaEditor').treegrid('getSelected');
 	        if (node) {
-	            $('#tg').treegrid('remove', node.id);
+	            $('#formulaEditor').treegrid('remove', node.LevelCode);
 	        }
 	    }
 	    function collapse() {
-	        var node = $('#tg').treegrid('getSelected');
+	        var node = $('#formulaEditor').treegrid('getSelected');
 	        if (node) {
-	            $('#tg').treegrid('collapse', node.id);
+	            $('#formulaEditor').treegrid('collapse', node.LevelCode);
 	        }
 	    }
 	    function expand() {
-	        var node = $('#tg').treegrid('getSelected');
+	        var node = $('#formulaEditor').treegrid('getSelected');
 	        if (node) {
-	            $('#tg').treegrid('expand', node.id);
+	            $('#formulaEditor').treegrid('expand', node.LevelCode);
 	        }
 	    }
+
+	    function getAppendRootLevelCode() {
+	        var rows = $('#formulaEditor').treegrid('getRoots');
+	        if (rows.length == 0) {
+	            return 'P01';
+	        }
+	        else {
+	            var maxCode = 0;
+	            for (var i = 0; i < rows.length; i++) {
+	                var temp = rows[i].LevelCode;
+	                if (temp.length != 3)
+	                    continue;
+	                var p = parseInt(temp.substring(1, temp.length));
+	                if (p > maxCode)
+	                    maxCode = p;
+	            }
+	            maxCode = maxCode + 1;
+	            if (maxCode.toString().length % 2 == 1)
+	                return 'P0' + maxCode;
+	            else
+	                return 'P' + maxCode;
+	        }
+	    }
+
+	    function getAppendLevelCode(parentId) {
+	        var rows = $('#formulaEditor').treegrid('getChildren', parentId);
+
+	        if (rows.length == 0) {
+	            return parentId + '01';
+	        }
+	        else {
+	            var maxCode = 0;
+	            for (var i = 0; i < rows.length; i++) {
+	                var temp = rows[i].LevelCode;
+	                if (temp.length != parentId.length + 2)
+	                    continue;
+	                var p = parseInt(temp.substring(1, temp.length));
+	                if (p > maxCode)
+	                    maxCode = p;
+	            }
+	            maxCode = maxCode + 1;
+	            if (maxCode.toString().length % 2 == 1)
+	                return 'P0' + maxCode;
+	            else
+	                return 'P' + maxCode;
+	        }
+	    }
+
         ///////////////////////////////////////////////////////////
 	    var editingId;
 	    function edit() {
 	        if (editingId != undefined) {
-	            $('#tg').treegrid('select', editingId);
+	            $('#formulaEditor').treegrid('select', editingId);
 	            return;
 	        }
-	        var row = $('#tg').treegrid('getSelected');
+	        var row = $('#formulaEditor').treegrid('getSelected');
 	        if (row) {
-	            editingId = row.id
-	            $('#tg').treegrid('beginEdit', editingId);
+	            editingId = row.LevelCode
+	            $('#formulaEditor').treegrid('beginEdit', editingId);
 	        }
 	    }
 	    function save() {
 	        if (editingId != undefined) {
-	            var t = $('#tg');
+	            var t = $('#formulaEditor');
 	            t.treegrid('endEdit', editingId);
 	            editingId = undefined;
 
@@ -174,10 +223,12 @@
 	    }
 	    function cancel() {
 	        if (editingId != undefined) {
-	            $('#tg').treegrid('cancelEdit', editingId);
+	            $('#formulaEditor').treegrid('cancelEdit', editingId);
 	            editingId = undefined;
 	        }
 	    }
+
+        //////////////////////////////////////////////////////////////////////
 
         // 验证公式合法性
 	    function validateExpression(expression) {
@@ -199,6 +250,133 @@
 
 	        return result;
 	    }
+
+	    //////////////////////////////////////////////////////////////////////
+
+	    function loadName(groupId) {
+	        var queryUrl = 'FormulaService.asmx/GetFormulaName';
+	        var dataToSend = '{groupId: "' + groupId + '"}';
+
+	        $.ajax({
+	            type: "POST",
+	            url: queryUrl,
+	            data: dataToSend,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (msg) {
+	                $('#formulaGroupName').val(jQuery.parseJSON(msg.d).name);
+	            }
+	        });
+	    }
+
+	    function loadFormulas(groupId) {
+	        var queryUrl = 'FormulaService.asmx/GetFormulasWithTreeGridFormat';
+	        var dataToSend = '{groupId: "' + groupId + '"}';
+
+	        var win = $.messager.progress({
+	            title: '请稍后',
+	            msg: '数据载入中...'
+	        });
+
+	        $.ajax({
+	            type: "POST",
+	            url: queryUrl,
+	            data: dataToSend,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (msg) {
+	                initializeFormulaEditor(jQuery.parseJSON(msg.d));
+	                $.messager.progress('close');
+	            },
+	            error: function () {
+	                $.messager.progress('close');
+	                $.messager.alert('错误', '数据载入失败！');
+	            }
+	        });
+	    }
+
+	    function initializeFormulaEditor(jsonData) {
+	        $('#formulaEditor').treegrid({
+	            data: jsonData,
+	            dataType: "json"
+	        });
+	    }
+
+	    function loadFormulaGroups() {
+	        var factoryId = 1;
+	        var queryUrl = 'FormulaService.asmx/GetFormulaGroupsWithDataGridFormat';
+	        var dataToSend = '{factoryId: ' + factoryId + '}';
+
+	        $.ajax({
+	            type: "POST",
+	            url: queryUrl,
+	            data: dataToSend,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (msg) {
+	                initializeFormulaGroups(jQuery.parseJSON(msg.d));
+	            }
+	        });
+	    }
+
+	    function initializeFormulaGroups(jsonData) {
+	        $('#formulaGroups').datagrid({
+	            data: jsonData,
+	            dataType: "json",
+	            onDblClickRow: function (rowIndex, rowData) {
+	                loadFormulas(rowData.KeyID);
+	                $('#dlg').dialog('close');
+	            }
+	        });
+	    }
+
+	    //////////////////////////////////////////////////////////////////////
+
+	    function temporarySave() {
+	        var groupId = $.getUrlParam('groupId');
+
+	        if ($('#formulaGroupName').validatebox('isValid') == false)
+	            return;
+
+	        var queryUrl = 'FormulaService.asmx/UpdateFormulaGroupName';
+	        var dataToSend = '{"groupId":"' + groupId + '","name":\'' + ($('#formulaGroupName').val()) + '\'}';
+
+	        $.ajax({
+	            type: "POST",
+	            url: queryUrl,
+	            data: dataToSend,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (msg) {
+	            }
+	        });
+
+	        queryUrl = 'FormulaService.asmx/SaveFormulasWithTreeGridFormat';
+	        dataToSend = '{"groupId":"' + groupId + '","json":\'' + JSON.stringify($('#formulaEditor').treegrid('getData')) + '\'}';
+
+	        $.ajax({
+	            type: "POST",
+	            url: queryUrl,
+	            data: dataToSend,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (msg) {
+	                $.messager.alert('消息', '暂存成功。', 'info');
+	            }
+	        });
+	    }
+
+	    //////////////////////////////////////////////////////////////////////
+
+	    $(document).ready(function () {
+	        //var groupId = 'e7f7f49f-9c9d-473a-9e3f-53d76d22cc64';
+	        var groupId = $.getUrlParam('groupId');
+	        loadName(groupId);
+	        loadFormulas(groupId);
+	        loadFormulaGroups();
+	    });
+
+	    //////////////////////////////////////////////////////////////////////
 
 	</script>
     </div>
