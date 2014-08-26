@@ -49,14 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CementTypeConvertCoefficientService.cs" />
+    <Compile Include="CustomAnalyseItemService.cs" />
     <Compile Include="ExpressionService.cs" />
     <Compile Include="GroupService.cs" />
     <Compile Include="Infrastructure\ComboboxJsonParser.cs" />
     <Compile Include="Infrastructure\ConnectionStringFactory.cs" />
     <Compile Include="Infrastructure\DataGridJsonParser.cs" />
+    <Compile Include="Infrastructure\DataTable2ChartJson.cs" />
     <Compile Include="Infrastructure\JsonHelper.cs" />
     <Compile Include="Infrastructure\TreeGridJsonParser.cs" />
     <Compile Include="Infrastructure\TreeJsonParser.cs" />
+    <Compile Include="KPIMaintainService.cs" />
     <Compile Include="MachineHaltLogService.cs" />
     <Compile Include="MeterDataDisplayService.cs" />
     <Compile Include="PeakValleyFlat\PVFChanges.cs" />

@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using NXJC.Slim.Service.Infrastructure;
+using System.Collections;
 
 namespace NXJC.UI.Web.ProcessDataAnalyse
 {
@@ -38,6 +40,24 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
             {
                 return "[]";
             }
+        }
+
+        [WebMethod]
+        public string GetCharDatas(string myJsonData)
+        {
+            string[] seletedStrings = myJsonData.JsonPickArray("selectedLines");
+            ArrayList productLineAndlableNames = new ArrayList();
+            foreach (var item in seletedStrings)
+            {
+                string productLineAndlableName = item.JsonPick("labelName");
+                productLineAndlableNames.Add(productLineAndlableName);
+            }
+            CustomAnalyseItemService service = new CustomAnalyseItemService();
+            DataTable dt = service.GetProcessDatas(productLineAndlableNames);
+
+            string result = DataTable2ChartJson.ToChartJson(dt, "Time", "T", "100");
+
+            return result;
         }
     }
 }

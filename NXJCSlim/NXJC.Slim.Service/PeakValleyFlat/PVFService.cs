@@ -31,6 +31,7 @@ namespace NXJC.Slim.Service.PeakValleyFlat
             {
                 PVFItem item = new PVFItem();
                 item.ID = int.Parse(row["ID"].ToString());
+                item.GroupID = int.Parse(row["GroupID"].ToString());
                 item.CompanyID = int.Parse(row["CompanyID"].ToString());
                 item.EndTime = row["EndTime"].ToString().Trim();
                 item.StartTime = row["StartTime"].ToString().Trim();
@@ -49,17 +50,20 @@ namespace NXJC.Slim.Service.PeakValleyFlat
                 foreach (var item in inserted)
                 {
                     Insert<PVFItem> insert = new Insert<PVFItem>("PeakValleyFlat", item);
+                    insert.AddExcludeField("ID");
                     dataFactory.Save<PVFItem>(insert);
                 }
                 foreach (var item1 in updated)
                 {
                     Update<PVFItem> update = new Update<PVFItem>("PeakValleyFlat", item1);
+                    update.AddCriterion("ID", "ID", item1.ID, SqlServerDataAdapter.Infrastruction.CriteriaOperator.Equal);
+                    update.AddExcludeField("ID");
                     dataFactory.Save<PVFItem>(update);
                 }
                 foreach (var item2 in deleted)
                 {
                     Delete delete = new Delete("PeakValleyFlat");
-                    delete.AddCriterions("ID", item2.ID, SqlServerDataAdapter.Infrastruction.CriteriaOperator.Equal);
+                    delete.AddCriterions("ID", "ID",item2.ID, SqlServerDataAdapter.Infrastruction.CriteriaOperator.Equal);
                     dataFactory.Remove(delete);
                 }
                 scope.Complete();

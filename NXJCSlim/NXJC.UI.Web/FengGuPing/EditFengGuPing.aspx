@@ -85,6 +85,7 @@
                 data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
+                    { field: 'GroupID', title: '组号', width: '10%', align: 'center', editor: { type: 'numberbox', options: { precision: 0 } } },
                     { field: 'StartTime', title: '起始时间', width:'20%', align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
                     { field: 'EndTime', title: '终止时间', width:'20%', align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
                     {
@@ -93,10 +94,8 @@
                             if (value == 0)
                                 return '峰';
                             else if (value == 1)
-                                return '尖峰';
-                            else if (value == 2)
                                 return '谷';
-                            else if (value == 3)
+                            else if (value == 2)
                                 return '平';
                             else
                                 return '';
@@ -109,21 +108,18 @@
                                 data: [{
                                     label: '峰',
                                     value: 0
-                                }, {
-                                    label: '尖峰',
+                                },{
+                                    label: '谷',
                                     value: 1
                                 }, {
-                                    label: '谷',
-                                    value: 2
-                                }, {
                                     label: '平',
-                                    value: 3
+                                    value: 2
                                 }]
                             }
                         }
                     },
                     {
-                        field: 'Flag', title: '启用标志', width:'20%', align: 'center',
+                        field: 'Flag', title: '启用标志', width:'15%', align: 'center',
                         formatter: function (value) {
                             if (value == true || value == "true")
                                 return "启用";
@@ -135,7 +131,7 @@
                         editor: { type: 'checkbox', options: { on: true, off: false } }
                     },
                     {
-                        field: 'action', title: '操作', width:'19%', align: 'center',
+                        field: 'action', title: '操作', width:'14%', align: 'center',
                         formatter: function (value, row, index) {
                             var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
                             return s;
