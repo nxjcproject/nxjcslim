@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ExpressionService.cs" />
     <Compile Include="GroupService.cs" />
+    <Compile Include="HandoverLogService.cs" />
     <Compile Include="Infrastructure\ComboboxJsonParser.cs" />
     <Compile Include="Infrastructure\ConnectionStringFactory.cs" />
     <Compile Include="Infrastructure\DataGridJsonParser.cs" />

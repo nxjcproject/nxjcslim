@@ -9,53 +9,78 @@ namespace NXJC.Slim.Monitoring.Simulator
 {
     class Program
     {
-        private static readonly string CONNECTION_STRING = "Data Source=DEC-WINSVR12;Initial Catalog=Db_01_WastedHeatPower;Integrated Security=True";
+        private static readonly string CONNECTION_STRING = "Data Source=DEC-WINSVR12;Initial Catalog={0};Integrated Security=True";
+        private static readonly string[] DATABASES = new string[] { "Db_01_YFC", "Db_01_ND", "Db_01_LS_WastedHeatPower2" };
+
+        private static readonly IDictionary<string, IList<DataTable>> DatabaseTableDictionary = new Dictionary<string, IList<DataTable>>();
+        private static readonly IDictionary<string, SqlConnection> DatabaseConnections = new Dictionary<string, SqlConnection>();
+
         private static readonly Random random = new Random();
 
         static void Main(string[] args)
         {
+            // 初始化数据库字典
+            foreach (var databaseName in DATABASES)
+            {
+                IList<DataTable> tables = new List<DataTable>();
+
+                string connectionString = string.Format(CONNECTION_STRING, databaseName);
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT DISTINCT TableName FROM ContrastTable";
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            tables.Add(GetStructure(connectionString, reader[0].ToString().Trim()));
+                        }
+                    }
+                }
+
+                DatabaseTableDictionary.Add(databaseName, tables);
+            }
+
+            // 建立化数据库连接字典
+            foreach (var databaseName in DATABASES)
+            {
+                string connectionString = string.Format(CONNECTION_STRING, databaseName);
+                DatabaseConnections.Add(databaseName, new SqlConnection(connectionString));
+            }
+
+            int indexOfDatabase = 0;
+            int.TryParse(Console.ReadLine(), out indexOfDatabase);
 
             Console.WriteLine("宁夏建材实时监控数据仿真, Ctrl + C 退出");
 
-            IList<string> tablesToSimulate = new List<string>();
+            DatabaseConnections[DATABASES[indexOfDatabase]].Open();
 
-            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+            while (true)
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT DISTINCT TableName FROM ContrastTable";
 
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                SqlCommand cmd = DatabaseConnections[DATABASES[indexOfDatabase]].CreateCommand();
+
+                foreach (var dt in DatabaseTableDictionary[DATABASES[indexOfDatabase]])
                 {
-                    while (reader.Read())
-                    {
-                        tablesToSimulate.Add(reader[0].ToString().Trim());
-                    }
+                    cmd.CommandText = GetUpdateCommand(dt);
+                    cmd.ExecuteNonQuery();
                 }
 
-                while (true)
-                {
-                    foreach (var table in tablesToSimulate)
-                    {
-                        DataSet ds = GetStructure(table);
-                        command.CommandText = GetUpdateCommand(ds, table);
-                        command.ExecuteNonQuery();
-                    }
-
-                    System.Threading.Thread.Sleep(500);
-                    Console.Write(".");
-                }
+                Console.Write(".");
             }
         }
 
-        private static DataSet GetStructure(string table)
+        private static DataTable GetStructure(string connectionString, string table)
         {
             DataSet ds = new DataSet();
 
-            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM " + table;
+                command.CommandText = "SELECT * FROM [" + table + "]";
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {
@@ -63,18 +88,19 @@ namespace NXJC.Slim.Monitoring.Simulator
                 }
             }
 
-            return ds;
+            ds.Tables[0].TableName = table;
+            return ds.Tables[0];
         }
 
-        private static string GetUpdateCommand(DataSet ds, string tableName)
+        private static string GetUpdateCommand(DataTable dt)
         {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("UPDATE ");
-            sb.Append(tableName);
+            sb.Append(dt.TableName);
             sb.Append(" SET ");
 
-            foreach (DataColumn column in ds.Tables[0].Columns)
+            foreach (DataColumn column in dt.Columns)
             {
                 sb.Append("[").Append(column.ColumnName).Append("]");
                 sb.Append(" = ");
@@ -95,7 +121,7 @@ namespace NXJC.Slim.Monitoring.Simulator
             }
             if (column.DataType == typeof(Single))
             {
-                return Convert.ToSingle(random.NextDouble() * random.Next(500)).ToString("#0.00");
+                return Convert.ToSingle(random.NextDouble()).ToString("#0.00");
             }
             if (column.DataType == typeof(bool))
             {

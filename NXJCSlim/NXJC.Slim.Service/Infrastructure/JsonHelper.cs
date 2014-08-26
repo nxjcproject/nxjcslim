@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
@@ -31,6 +32,30 @@ namespace NXJC.Slim.Service.Infrastructure
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
             return serializer.ReadObject(stream);
+        }
+
+        public static string DataTableFirstRowToJson(DataTable table)
+        {
+            if (table == null || table.Rows.Count == 0)
+                return "{}";
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (DataColumn dc in table.Columns)
+                {
+                        sb.Append("\"" + dc.ColumnName + "\":" + "\"" + table.Rows[i][dc.ColumnName].ToString().Trim() + "\",");
+                }
+
+                sb.Remove(sb.Length - 1, 1);
+            }
+
+            sb.Append("}");
+
+            return sb.ToString();
+
         }
 
         /// <summary>

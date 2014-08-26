@@ -144,6 +144,7 @@
     <Content Include="Working\HandoverLoger.aspx" />
     <Content Include="Working\HandoverLogQuerying.aspx" />
     <Content Include="Working\WorkingService.asmx" />
+    <Content Include="Working\HandoverLogDetail.aspx" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="Scripts\EasyUI\changelog.txt" />
@@ -669,6 +670,13 @@
     </Compile>
     <Compile Include="SystemData\GroupInformation.aspx.designer.cs">
       <DependentUpon>GroupInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Working\HandoverLogDetail.aspx.cs">
+      <DependentUpon>HandoverLogDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Working\HandoverLogDetail.aspx.designer.cs">
+      <DependentUpon>HandoverLogDetail.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

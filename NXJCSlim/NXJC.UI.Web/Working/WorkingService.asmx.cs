@@ -87,6 +87,13 @@ namespace NXJC.UI.Web.Working
         }
 
         [WebMethod]
+        public string GetWorkingSectionAssignmentWithDataGridFormat(int handoverLogId)
+        {
+            DataTable dt = HandoverLogService.GetWorkingSectionAssignmentByHandoverLogId(handoverLogId);
+            return DataGridJsonParser.DataTableToJson(dt, "WorkingSectionID", "StaffID", "StaffName", "WorkingSectionName");
+        }
+
+        [WebMethod]
         public string GetDCSWarningLogWithDataGridFormat(int productLineId)
         {
             DataTable dt = DCSWarningLogService.GetWarningLog(productLineId);
@@ -105,6 +112,22 @@ namespace NXJC.UI.Web.Working
         {
             DataTable dt = MachineHaltLogService.GetHaltLog(productLineId);
             return DataGridJsonParser.DataTableToJson(dt, "HaltTime", "Label", "Machine");
+        }
+        #endregion
+
+        #region Aggregate Root Read
+        [WebMethod]
+        public string GetHandoverLogWithDataGridFormat()
+        {
+            DataTable dt = HandoverLogService.GetHandoverLog();
+            return DataGridJsonParser.DataTableToJson(dt, "ID", "ProductLineID", "ProductLineName", "ShiftDate", "Shifts", "WorkingTeamID", "WorkingTeamName", "ChargeManID", "ChargeManName");
+        }
+
+        [WebMethod]
+        public string GetHandoverLogWithSimpleGridFormat(int handoverLogId)
+        {
+            DataTable dt = HandoverLogService.GetHandoverLogByHandoverLogId(handoverLogId);
+            return JsonHelper.DataTableFirstRowToJson(dt);
         }
         #endregion
     }
