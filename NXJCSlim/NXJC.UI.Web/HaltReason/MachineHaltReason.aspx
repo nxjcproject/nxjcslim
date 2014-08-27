@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="KPIMaintain.aspx.cs" Inherits="NXJC.UI.Web.KPI.KPIMaintain" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MachineHaltReason.aspx.cs" Inherits="NXJC.UI.Web.HaltReason.MachineHaltReason" %>
 
 <!DOCTYPE html>
 
@@ -62,7 +62,7 @@
             //parent.$.messager.progress({ text: '数据加载中....' });
             $.ajax({
                 type: "POST",
-                url: "KPIMaintain.asmx/GetKPIDatas",
+                url: "MachineHaltReason.asmx/GetHaltReasonDatas",
                 //data: "{companyId: '1'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -85,18 +85,10 @@
                 data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
-                    { field: 'StandardCategory', title: '标准类别', width: '10%', align: 'center', editor: 'text' },
-                    { field: 'Limit_CCS_CCClinker', title: '可比熟料综合煤耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_ECClinker', title: '可比熟料综合电耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_ECCement', title: '可比水泥综合电耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_EnCClinker', title: '可比熟料综合能耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_EnCCement', title: '可比水泥综合能耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'RawBatch_ElectricityConsumption', title: '生料制备工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Clinker_CoalConsumption', title: '熟料烧成工段煤耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Clinker_ElectricityConsumption', title: '熟料烧成工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Cement_ElectricityConsumption', title: '水泥制备工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
+                    { field: 'ID', title: '编号', width: '35%', align: 'center',hidden:true },
+                    { field: 'Name', title: '原因名称', width: '35%', align: 'center', editor: 'text' },
                     {
-                        field: 'action', title: '操作', width: '5%', align: 'center',
+                        field: 'action', title: '操作', width: '25%', align: 'center',
                         formatter: function (value, row, index) {
                             var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
                             return s;

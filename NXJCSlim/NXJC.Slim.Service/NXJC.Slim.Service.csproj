@@ -63,6 +63,7 @@
     <Compile Include="Infrastructure\TreeJsonParser.cs" />
     <Compile Include="KPIMaintainService.cs" />
     <Compile Include="MachineHaltLogService.cs" />
+    <Compile Include="MachineHaltReasonService.cs" />
     <Compile Include="MeterDataDisplayService.cs" />
     <Compile Include="PeakValleyFlat\PVFChanges.cs" />
     <Compile Include="PeakValleyFlat\PVFItem.cs" />
@@ -71,9 +72,11 @@
     <Compile Include="ProductLineService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\Utility.cs" />
+    <Compile Include="StaffInfoService.cs" />
     <Compile Include="StaffService.cs" />
     <Compile Include="WarningLogService.cs" />
     <Compile Include="WorkingSectionService.cs" />
+    <Compile Include="WorkingTeamService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

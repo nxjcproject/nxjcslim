@@ -127,6 +127,8 @@
     <Content Include="EnergyEfficiency\FormulaGroups.aspx" />
     <Content Include="FractionalPowerConsumption\Yearly.aspx" />
     <Content Include="FengGuPing\EditFengGuPing.asmx" />
+    <Content Include="HaltReason\MachineHaltReason.asmx" />
+    <Content Include="HaltReason\MachineHaltReason.aspx" />
     <Content Include="KPI\CustomKPI.aspx" />
     <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="KPI\KPIMaintain.asmx" />
@@ -493,6 +495,12 @@
     <Content Include="Report\ClinkerProductionLineMonthlyOutput.aspx" />
     <Content Include="Report\ConsumptionMonthlyCoalDust.aspx" />
     <Content Include="Scripts\knockoutjs-3.2.0.js" />
+    <Content Include="SectionAndGroup\WorkingSection.asmx" />
+    <Content Include="SectionAndGroup\WorkingSection.aspx" />
+    <Content Include="SectionAndGroup\WorkingTeam.asmx" />
+    <Content Include="SectionAndGroup\WorkingTeam.aspx" />
+    <Content Include="staffInfo\StaffInfo.asmx" />
+    <Content Include="staffInfo\StaffInfo.aspx" />
     <Content Include="Working\HandoverLoger.aspx" />
     <Content Include="Working\HandoverLogQuerying.aspx" />
     <Content Include="Working\WorkingService.asmx" />
@@ -923,6 +931,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HaltReason\MachineHaltReason.asmx.cs">
+      <DependentUpon>MachineHaltReason.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HaltReason\MachineHaltReason.aspx.cs">
+      <DependentUpon>MachineHaltReason.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HaltReason\MachineHaltReason.aspx.designer.cs">
+      <DependentUpon>MachineHaltReason.aspx</DependentUpon>
+    </Compile>
     <Compile Include="KPI\CustomKPI.aspx.cs">
       <DependentUpon>CustomKPI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -992,6 +1011,39 @@
       <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SectionAndGroup\WorkingSection.asmx.cs">
+      <DependentUpon>WorkingSection.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SectionAndGroup\WorkingSection.aspx.cs">
+      <DependentUpon>WorkingSection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SectionAndGroup\WorkingSection.aspx.designer.cs">
+      <DependentUpon>WorkingSection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SectionAndGroup\WorkingTeam.asmx.cs">
+      <DependentUpon>WorkingTeam.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SectionAndGroup\WorkingTeam.aspx.cs">
+      <DependentUpon>WorkingTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SectionAndGroup\WorkingTeam.aspx.designer.cs">
+      <DependentUpon>WorkingTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="staffInfo\StaffInfo.asmx.cs">
+      <DependentUpon>StaffInfo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="staffInfo\StaffInfo.aspx.cs">
+      <DependentUpon>StaffInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="staffInfo\StaffInfo.aspx.designer.cs">
+      <DependentUpon>StaffInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Working\HandoverLoger.aspx.cs">
       <DependentUpon>HandoverLoger.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
