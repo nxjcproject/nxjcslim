@@ -125,8 +125,11 @@
     <Content Include="EnergyEfficiency\FormulaService.asmx" />
     <Content Include="EnergyEfficiency\FormulaEditor.aspx" />
     <Content Include="EnergyEfficiency\FormulaGroups.aspx" />
-    <Content Include="FractionalPowerConsumption\Yearly.aspx" />
+    <Content Include="FractionalElectricPowerCount\PowerCountService.asmx" />
+    <Content Include="FractionalElectricPowerCount\Yearly.aspx" />
     <Content Include="FengGuPing\EditFengGuPing.asmx" />
+    <Content Include="FractionalElectricPowerCount\Monthly.aspx" />
+    <Content Include="FractionalElectricPowerCount\Daily.aspx" />
     <Content Include="KPI\CustomKPI.aspx" />
     <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="KPI\KPIMaintain.asmx" />
@@ -913,12 +916,30 @@
     <Compile Include="FengGuPing\EditFengGuPing.aspx.designer.cs">
       <DependentUpon>EditFengGuPing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FractionalPowerConsumption\Yearly.aspx.cs">
+    <Compile Include="FractionalElectricPowerCount\PowerCountService.asmx.cs">
+      <DependentUpon>PowerCountService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FractionalElectricPowerCount\Yearly.aspx.cs">
       <DependentUpon>Yearly.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FractionalPowerConsumption\Yearly.aspx.designer.cs">
+    <Compile Include="FractionalElectricPowerCount\Yearly.aspx.designer.cs">
       <DependentUpon>Yearly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FractionalElectricPowerCount\Monthly.aspx.cs">
+      <DependentUpon>Monthly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FractionalElectricPowerCount\Monthly.aspx.designer.cs">
+      <DependentUpon>Monthly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FractionalElectricPowerCount\Daily.aspx.cs">
+      <DependentUpon>Daily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FractionalElectricPowerCount\Daily.aspx.designer.cs">
+      <DependentUpon>Daily.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

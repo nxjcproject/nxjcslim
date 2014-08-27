@@ -53,5 +53,14 @@ namespace NXJC.Slim.Service
             }
         }
 
+        public static DataTable GetAmmetersByFactoryId(int factoryId)
+        {
+            string connectionString = ConnectionStringFactory.GetNXJCConnectionString();
+
+            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
+            Query query = new Query("AmmeterContrast");
+
+            return factory.Query(query);
+        }
     }
 }

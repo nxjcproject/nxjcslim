@@ -92,6 +92,15 @@ namespace NXJC.UI.Web.EnergyEfficiency
             else
                 return "";
         }
+
+        [WebMethod]
+        public string GetAmmeterLabelsWithTreeGridFormat(int factoryId)
+        {
+            DataTable dt = MeterDataDisplayService.GetAmmetersByFactoryId(factoryId);
+
+            return TreeGridJsonParser.DataTableToJson(dt, "ElectricRoom", new string[] { "AmmeterNumber", "AmmeterName" });
+        }
+
         #endregion
 
         #region Update

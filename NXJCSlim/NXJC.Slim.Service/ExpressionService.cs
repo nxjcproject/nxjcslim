@@ -135,6 +135,7 @@ namespace NXJC.Slim.Service
             ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
             Query query = new Query("Formula");
             query.AddCriterion("GroupID", groupId, SqlServerDataAdapter.Infrastruction.CriteriaOperator.Equal);
+            query.OrderByClause = new SqlServerDataAdapter.Infrastruction.OrderByClause("LevelCode", false);
 
             return factory.Query(query);
         }

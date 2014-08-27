@@ -30,11 +30,9 @@
 	<div id="wrapper" class="easyui-panel" style="width:98%;height:auto;padding:2px;">
 	<div class="easyui-panel" style="width:100%;padding:5px;">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="javascript:history.go(-1);">返回</a> | 
-        <a href="javascript:void(0)" class="easyui-linkbutton easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-reload'" title="从其他公式组载入。" onclick="$('#dlg').dialog('open')">载入</a> 
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="appendRoot()">添加根工序</a> | 
 		名称：<input id="formulaGroupName" class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,50]'" /> | 
 
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="temporarySave()">暂存</a> | 
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="temporarySave()">暂存</a> 
         <a href="javascript:void(0)" class="easyui-linkbutton c4 easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-ok'" title="提交后不可修改，请谨慎操作。" onclick="">提交</a>
 	</div>
 	<table id="formulaEditor" class="easyui-treegrid" title="公式录入" style="width:100%;height:450px"
@@ -57,6 +55,12 @@
 			</tr>
 		</thead>
 	</table>
+	<div class="easyui-panel" style="width:100%;padding:5px;">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="appendRoot()">添加根工序</a> | 
+        <a href="javascript:void(0)" class="easyui-linkbutton easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-reload'" title="从其他公式组载入。" onclick="$('#dlgLoad').dialog('open')">载入</a> | 
+        <a href="javascript:void(0)" class="easyui-linkbutton easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-filter'" title="查看可用的电表变量。" onclick="$('#dlgAmmeter').dialog('open')">电表变量表</a> 
+        <a href="javascript:void(0)" class="easyui-linkbutton easyui-tooltip tooltip-f" data-options="plain:true,iconCls:'icon-filter'" title="查看可用的累积量变量。" onclick="$('#dlgCumulant').dialog('open')">累计量变量表</a> 
+	</div>
 	<div id="mm" class="easyui-menu" style="width:120px;">
 		<div onclick="append()" data-options="iconCls:'icon-add'">添加</div>
 		<div onclick="removeIt()" data-options="iconCls:'icon-remove'">删除</div>
@@ -67,7 +71,7 @@
 		<div onclick="expand()">展开</div>
 	</div>
 
-    <div id="dlg" class="easyui-dialog" title="载入公式组" style="width:500px;height:500px;" 
+    <div id="dlgLoad" class="easyui-dialog" title="载入公式组" style="width:500px;height:500px;" 
         data-options="
             iconCls:'icon-reload',
             modal:true,
@@ -86,8 +90,43 @@
 	    </table>
 	</div>
 
+    <div id="dlgAmmeter" class="easyui-dialog" title="电表变量表" style="width:550px;height:500px;" 
+        data-options="
+            iconCls:'icon-filter',
+            closed:true
+        " >
+	    <table id="tgAmmeters" class="easyui-treegrid" style="width:100%;height:100%"
+			    data-options="idField:'AmmeterNumber',treeField:'AmmeterNumber',singleSelect:true">
+		    <thead>
+			    <tr>
+				    <th data-options="field:'AmmeterNumber',width:260">电表变量</th>
+				    <th data-options="field:'AmmeterName',width:260">电表描述</th>
+			    </tr>
+		    </thead>
+	    </table>
+	</div>
+
+    <div id="dlgCumulant" class="easyui-dialog" title="累计量变量表" style="width:500px;height:500px;" 
+        data-options="
+            iconCls:'icon-reload',
+            modal:true,
+            closed:true
+        " >
+	    <table id="Table2" class="easyui-datagrid" style="width:100%;height:100%"
+			    data-options="singleSelect:true">
+		    <thead>
+			    <tr>
+				    <th data-options="field:'KeyID',hidden:true"></th>
+				    <th data-options="field:'Name',width:260">公式组名称</th>
+				    <th data-options="field:'CreateDate',width:100">创建时间</th>
+				    <th data-options="field:'State',width:100,align:'center'">状态</th>
+			    </tr>
+		    </thead>
+	    </table>
+	</div>
 
 	<script type="text/javascript">
+        // 公式检验样式
 	    function formatFormula(value) {
 	        var validateResult = validateExpression(value);
 	        
@@ -102,6 +141,10 @@
 	            return s;
 	        }
 	    }
+        
+        /////////////////////////////////////////////////////////////////////
+
+        // 右键菜单
 	    function onContextMenu(e, row) {
 	        e.preventDefault();
 	        $(this).treegrid('select', row.LevelCode);
@@ -111,6 +154,7 @@
 	        });
 	    }
 
+        // 添加根节点
 	    function appendRoot() {
 	        var levelCode = getAppendRootLevelCode();
 	        $('#formulaEditor').treegrid('append', {
@@ -121,6 +165,8 @@
 	            }]
 	        })
 	    }
+
+        //添加子节点
 	    function append() {
 	        var node = $('#formulaEditor').treegrid('getSelected');
 	        var levelCode = getAppendLevelCode(node.LevelCode);
@@ -133,18 +179,24 @@
 	            }]
 	        })
 	    }
+
+        // 删除节点
 	    function removeIt() {
 	        var node = $('#formulaEditor').treegrid('getSelected');
 	        if (node) {
 	            $('#formulaEditor').treegrid('remove', node.LevelCode);
 	        }
 	    }
+
+        // 收起节点
 	    function collapse() {
 	        var node = $('#formulaEditor').treegrid('getSelected');
 	        if (node) {
 	            $('#formulaEditor').treegrid('collapse', node.LevelCode);
 	        }
 	    }
+
+        // 展开节点
 	    function expand() {
 	        var node = $('#formulaEditor').treegrid('getSelected');
 	        if (node) {
@@ -152,6 +204,9 @@
 	        }
 	    }
 
+	    ////////////////////////////////////////////////////////////////////////////////
+
+        // 生成根节点ID
 	    function getAppendRootLevelCode() {
 	        var rows = $('#formulaEditor').treegrid('getRoots');
 	        if (rows.length == 0) {
@@ -175,6 +230,7 @@
 	        }
 	    }
 
+        // 生成子节点ID
 	    function getAppendLevelCode(parentId) {
 	        var rows = $('#formulaEditor').treegrid('getChildren', parentId);
 
@@ -199,7 +255,9 @@
 	        }
 	    }
 
-        ///////////////////////////////////////////////////////////
+	    ///////////////////////////////////////////////////////////
+
+        // 编辑
 	    var editingId;
 	    function edit() {
 	        if (editingId != undefined) {
@@ -253,6 +311,7 @@
 
 	    //////////////////////////////////////////////////////////////////////
 
+        // 按公式组ID获取公式名
 	    function loadName(groupId) {
 	        var queryUrl = 'FormulaService.asmx/GetFormulaName';
 	        var dataToSend = '{groupId: "' + groupId + '"}';
@@ -269,6 +328,7 @@
 	        });
 	    }
 
+        // 按公式组获取所有公式
 	    function loadFormulas(groupId) {
 	        var queryUrl = 'FormulaService.asmx/GetFormulasWithTreeGridFormat';
 	        var dataToSend = '{groupId: "' + groupId + '"}';
@@ -295,6 +355,7 @@
 	        });
 	    }
 
+        // 初始化公式编辑器
 	    function initializeFormulaEditor(jsonData) {
 	        $('#formulaEditor').treegrid({
 	            data: jsonData,
@@ -302,6 +363,9 @@
 	        });
 	    }
 
+	    ///////////////////////////////////////////////////////////////////////
+
+        // 获取公式组
 	    function loadFormulaGroups() {
 	        var factoryId = 1;
 	        var queryUrl = 'FormulaService.asmx/GetFormulaGroupsWithDataGridFormat';
@@ -332,6 +396,7 @@
 
 	    //////////////////////////////////////////////////////////////////////
 
+        // 暂存
 	    function temporarySave() {
 	        var groupId = $.getUrlParam('groupId');
 
@@ -368,12 +433,40 @@
 
 	    //////////////////////////////////////////////////////////////////////
 
+	    // 读取电表变量表
+
+	    function queryAmmeters() {
+	        var queryUrl = 'FormulaService.asmx/GetAmmeterLabelsWithTreeGridFormat';
+	        var dataToSend = '{factoryId: ' + 1 + '}';
+
+	        $.ajax({
+	            type: "POST",
+	            url: queryUrl,
+	            data: dataToSend,
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (msg) {
+	                initializeAmmeterTreeGrid(jQuery.parseJSON(msg.d));
+	            }
+	        });
+	    }
+
+	    function initializeAmmeterTreeGrid(jsonData) {
+	        $('#tgAmmeters').treegrid({
+	            data: jsonData,
+	            dataType: "json"
+	        });
+	    };
+
+        ///////////////////////////////////////////////////////////////////////
+
 	    $(document).ready(function () {
 	        //var groupId = 'e7f7f49f-9c9d-473a-9e3f-53d76d22cc64';
 	        var groupId = $.getUrlParam('groupId');
 	        loadName(groupId);
 	        loadFormulas(groupId);
 	        loadFormulaGroups();
+	        queryAmmeters();
 	    });
 
 	    //////////////////////////////////////////////////////////////////////
