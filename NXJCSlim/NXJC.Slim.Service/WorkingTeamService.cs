@@ -9,31 +9,15 @@ using System.Text;
 
 namespace NXJC.Slim.Service
 {
-    public class WorkingSectionService
+    public class WorkingTeamService
     {
         private ISqlServerDataFactory dataFactory;
         string connString;
 
-        public WorkingSectionService()
+        public WorkingTeamService()
         {
             connString = ConnectionStringFactory.GetNXJCConnectionString();
             dataFactory = new SqlServerDataFactory(connString);
-        }
-
-        /// <summary>
-        /// 按生产线ID获取工段
-        /// </summary>
-        /// <param name="productLineId"></param>
-        /// <returns></returns>
-        public static DataTable GetWorkingTeamByProductLineId(int productLineId)
-        {
-            string connectionString = ConnectionStringFactory.GetNXJCConnectionString();
-
-            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
-            Query query = new Query("WorkingSection");
-            query.AddCriterion("ProductLineID", productLineId, SqlServerDataAdapter.Infrastruction.CriteriaOperator.Equal);
-
-            return factory.Query(query);
         }
 
         public DataTable GetProductLine()
@@ -50,9 +34,24 @@ namespace NXJC.Slim.Service
             return dt;
         }
 
-        public DataTable GetWorkingSection()
+        public DataTable GetStaffInfo()
         {
-            Query query = new Query("WorkingSection");
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID, Name FROM StaffInfo";
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        public DataTable GetWorkingTeam()
+        {
+            Query query = new Query("WorkingTeam");
+
             DataTable dt = dataFactory.Query(query);
 
             return dt;

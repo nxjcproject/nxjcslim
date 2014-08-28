@@ -1,20 +1,24 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="KPIMaintain.aspx.cs" Inherits="NXJC.UI.Web.KPI.KPIMaintain" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkingTeam.aspx.cs" Inherits="NXJC.UI.Web.SectionAndGroup.WorkingTeam" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="/Scripts/EasyUI/themes/gray/easyui.css" rel="stylesheet" />
+   <link href="/Scripts/EasyUI/themes/gray/easyui.css" rel="stylesheet" />
     <link href="/Scripts/EasyUI/themes/icon.css" rel="stylesheet" />
     <script src="/Scripts/EasyUI/jquery.min.js"></script>
     <script src="/Scripts/EasyUI/jquery.easyui.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+            loadProductLineComboboxData('first');
+            loadStaffInfoComboboxData('first');
             loadGridData('first');
         });
 
+        var m_StaffInfoComboxData;
+        var m_ProductLineComboxData;
         var m_MsgData;
         var editIndex = undefined;
 
@@ -62,46 +66,119 @@
             //parent.$.messager.progress({ text: '数据加载中....' });
             $.ajax({
                 type: "POST",
-                url: "KPIMaintain.asmx/GetKPIDatas",
-                //data: "{companyId: '1'}",
+                url: "WorkingTeam.asmx/GetWorkingTeamDatas",
+                data: "{companyId: '1'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
-                    m_MsgData = jQuery.parseJSON(msg.d);
-
                     if (myLoadType == 'first') {
-                        myLoadType = 'last';
+                        m_MsgData = jQuery.parseJSON(msg.d);
                         InitializeGrid(m_MsgData);
                     }
                     else if (myLoadType == 'last') {
+                        m_MsgData = jQuery.parseJSON(msg.d);
                         $('#dg').datagrid('loadData', m_MsgData);
                     }
                 }
             });
         }
+
+        function loadProductLineComboboxData(myLoadType) {
+
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                url: "WorkingTeam.asmx/GetProductLineForCombobox",
+                data: "",//"{companyId: '1'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (myLoadType == 'first') {
+                        m_ProductLineComboxData = jQuery.parseJSON(msg.d);
+                        //InitializeGrid(m_MsgData);
+                    }
+                    else if (myLoadType == 'last') {
+                        m_ProductLineComboxData = jQuery.parseJSON(msg.d);
+                        //$('#dg').datagrid('loadData', m_MsgData);
+                    }
+                }
+            });
+        }
+
+        function loadStaffInfoComboboxData(myLoadType) {
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                url: "WorkingTeam.asmx/GetStaffInfoForCombobox",
+                data: "",//"{companyId: '1'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (myLoadType == 'first') {
+                        m_StaffInfoComboxData = jQuery.parseJSON(msg.d);
+                        //InitializeGrid(m_MsgData);
+                    }
+                    else if (myLoadType == 'last') {
+                        m_StaffInfoComboxData = jQuery.parseJSON(msg.d);
+                        //$('#dg').datagrid('loadData', m_MsgData);
+                    }
+                }
+            });
+        }
+
         function InitializeGrid(myData) {
 
             $('#dg').datagrid({
                 data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
-                    { field: 'StandardCategory', title: '标准类别', width: '10%', align: 'center', editor: 'text' },
-                    { field: 'Limit_CCS_CCClinker', title: '可比熟料综合煤耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_ECClinker', title: '可比熟料综合电耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_ECCement', title: '可比水泥综合电耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_EnCClinker', title: '可比熟料综合能耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_EnCCement', title: '可比水泥综合能耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'RawBatch_ElectricityConsumption', title: '生料制备工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Clinker_CoalConsumption', title: '熟料烧成工段煤耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Clinker_ElectricityConsumption', title: '熟料烧成工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Cement_ElectricityConsumption', title: '水泥制备工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
                     {
-                        field: 'action', title: '操作', width: '5%', align: 'center',
-                        formatter: function (value, row, index) {
-                            var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
-                            return s;
+                        field: 'ProductLineID', title: '生产线', width: '25%', method: 'post', align: 'center',
+                        formatter: function (value, row, rowIndex) {
+                            if (value == 0) {
+                                return;
+                            }
+                            for (var i = 0; i < m_ProductLineComboxData.length; i++) {
+                                if (m_ProductLineComboxData[i].ID == value) {
+                                    return m_ProductLineComboxData[i].Name;
+                                }
+                            }
+                        },
+                        editor: {
+                            type: 'combobox',
+                            options: {
+                                valueField: 'ID',
+                                textField: 'Name',
+                                data: m_ProductLineComboxData,
+                                //url: "WorkingSection.asmx/GetProductLineDatas",
+                                required: true
+                            }
                         }
-                    }
+                    }, {
+                        field: 'ChargeManID', title: '负责人', width: '20%', method: 'post', align: 'center',
+                        formatter: function (value, row, rowIndex) {
+                            if (value == 0) {
+                                return;
+                            }
+                            for (var i = 0; i < m_StaffInfoComboxData.length; i++) {
+                                if (m_StaffInfoComboxData[i].ID == value) {
+                                    return m_StaffInfoComboxData[i].Name;
+                                }
+                            }
+                        },
+                        editor: {
+                            type: 'combobox',
+                            options: {
+                                valueField: 'ID',
+                                textField: 'Name',
+                                data: m_StaffInfoComboxData,
+                                //url: "WorkingSection.asmx/GetProductLineDatas",
+                                required: true
+                            }
+                        }
+                    },
+                    { field: 'Name', title: '班组名称', width: '25%', align: 'center', editor: 'text' },
+                    { field: 'Remarks', title: '备注', width: '27%', align: 'center', editor: 'text' },
                 ]]
             });
         }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="KPIMaintain.aspx.cs" Inherits="NXJC.UI.Web.KPI.KPIMaintain" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkingSection.aspx.cs" Inherits="NXJC.UI.Web.SectionAndGroup.WorkingSection" %>
 
 <!DOCTYPE html>
 
@@ -12,9 +12,11 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            loadComboboxData('first');
             loadGridData('first');
         });
 
+        var m_ComboxData;
         var m_MsgData;
         var editIndex = undefined;
 
@@ -62,46 +64,79 @@
             //parent.$.messager.progress({ text: '数据加载中....' });
             $.ajax({
                 type: "POST",
-                url: "KPIMaintain.asmx/GetKPIDatas",
-                //data: "{companyId: '1'}",
+                url: "WorkingSection.asmx/GetWorkingSectionDatas",
+                data: "{companyId: '1'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
-                    m_MsgData = jQuery.parseJSON(msg.d);
-
                     if (myLoadType == 'first') {
-                        myLoadType = 'last';
+                        m_MsgData = jQuery.parseJSON(msg.d);
                         InitializeGrid(m_MsgData);
                     }
                     else if (myLoadType == 'last') {
+                        m_MsgData = jQuery.parseJSON(msg.d);
                         $('#dg').datagrid('loadData', m_MsgData);
                     }
                 }
             });
         }
+
+        function loadComboboxData(myLoadType) {
+
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                url: "WorkingSection.asmx/GetProductLineDatas",
+                data: "",//"{companyId: '1'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (myLoadType == 'first') {
+                        m_ComboxData = jQuery.parseJSON(msg.d);
+                        //InitializeGrid(m_MsgData);
+                    }
+                    else if (myLoadType == 'last') {
+                        m_ComboxData = jQuery.parseJSON(msg.d);
+                        //$('#dg').datagrid('loadData', m_MsgData);
+                    }
+                }
+            });
+        }
+
         function InitializeGrid(myData) {
 
             $('#dg').datagrid({
                 data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
-                    { field: 'StandardCategory', title: '标准类别', width: '10%', align: 'center', editor: 'text' },
-                    { field: 'Limit_CCS_CCClinker', title: '可比熟料综合煤耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_ECClinker', title: '可比熟料综合电耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_ECCement', title: '可比水泥综合电耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_EnCClinker', title: '可比熟料综合能耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Limit_CC_EnCCement', title: '可比水泥综合能耗限定值', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'RawBatch_ElectricityConsumption', title: '生料制备工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Clinker_CoalConsumption', title: '熟料烧成工段煤耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Clinker_ElectricityConsumption', title: '熟料烧成工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
-                    { field: 'Cement_ElectricityConsumption', title: '水泥制备工段电耗', width: '15%', align: 'center', editor: { type: 'numberbox', options: { precision: 3 } } },
                     {
-                        field: 'action', title: '操作', width: '5%', align: 'center',
-                        formatter: function (value, row, index) {
-                            var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
-                            return s;
+                        field: 'ProductLineID', title: '生产线', width: '33%', method: 'post', align: 'center',
+                        formatter: function (value, row, rowIndex) {
+                            if (value == 0) {
+                                return;
+                            }
+                            for (var i = 0; i < m_ComboxData.length; i++) {
+                                if (m_ComboxData[i].ID == value){
+                                    return m_ComboxData[i].Name;
+                                }
+                            }
+                        },
+                        editor: {
+                            type: 'combobox',
+                            formatter: function () {
+                                var productLineName = $('#').combobox('getText').split('  ')[1];
+                            },
+                            options: {
+                                valueField: 'ID',
+                                textField: 'Name',
+                                data: m_ComboxData,
+                                //url: "WorkingSection.asmx/GetProductLineDatas",
+                                required:true
+                            }
                         }
-                    }
+                    },
+                    { field: 'Name', title: '工段名称', width: '33%', align: 'center', editor: 'text' },
+                    { field: 'Remarks', title: '备注', width: '33%', align: 'center', editor: 'text' },
                 ]]
             });
         }
