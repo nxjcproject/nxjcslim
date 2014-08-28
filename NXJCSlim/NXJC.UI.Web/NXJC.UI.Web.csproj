@@ -500,6 +500,7 @@
     <Content Include="Working\HandoverLogQuerying.aspx" />
     <Content Include="Working\WorkingService.asmx" />
     <Content Include="Working\HandoverLogDetail.aspx" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="ProcessDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="Scripts\EasyUI\changelog.txt" />

@@ -125,7 +125,7 @@ namespace NXJC.Slim.Monitoring.Simulator
             }
             if (column.DataType == typeof(bool))
             {
-                return random.Next(1).ToString();
+                return random.Next(2).ToString();
             }
 
             return "";
