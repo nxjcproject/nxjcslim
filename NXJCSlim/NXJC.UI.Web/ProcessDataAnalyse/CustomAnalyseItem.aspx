@@ -291,7 +291,7 @@
 	    </table>
     </div>
 
-	<div id="w" class="easyui-window" title="过程数据分析" data-options="closed:true" style="width:1000px;height:700px;padding:10px;">
+	<div id="w" class="easyui-window" title="过程数据分析" data-options="closed:true" style="width:900px;height:500px;padding:10px;">
 		<div class="easyui-panel" data-options="region:'north',border:true, collapsible:false, split:false" style="height:45%;">
 		    <table id="grid_ChartMain" data-options="fit:true,border:false"></table>
 	    </div>
