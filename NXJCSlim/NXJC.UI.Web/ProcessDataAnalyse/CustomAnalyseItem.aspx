@@ -76,7 +76,7 @@
         function onLabelDoubleClicked(row) {
             var productLineId = $('#productLineName').combobox('getValue');
             var productLineName = $('#productLineName').combobox('getText');
-            appendToLabelSelectedList(productLineId, productLineName, row['VariableName'], row['FieldName']);
+            appendToLabelSelectedList(productLineId, productLineName, row['VariableName'], row['VariableDescription']);
         };
 
         // 标签已选列表双击事件
@@ -85,8 +85,8 @@
         };
 
         // 追加标签项至已选择标签列表
-        function appendToLabelSelectedList(_productLineId, _productLineName, _labelName, _name) {
-            if (_labelName == null || _name == null)
+        function appendToLabelSelectedList(_productLineId, _productLineName, _variableName, _variableDescription) {
+            if (_variableName == null || _variableDescription == null)
                 return;
 
             // 最多只能添加8条标签项
@@ -96,10 +96,10 @@
             }
 
             $('#labelSelectedList').datagrid('appendRow', {
-                productLineId: _productLineId,
-                productLineName: _productLineName,
-                labelName: _labelName,
-                name: _name
+                ProductLineId: _productLineId,
+                ProductLineName: _productLineName,
+                VariableName: _variableName,
+                VariableDescription: _variableDescription
             });
         };
     </script>
@@ -251,6 +251,99 @@
         }
 
     </script>
+    <script type="text/javascript">
+
+        var myDIYModelLoadType;
+
+        function showModelDatagrid() {
+            var modelType = document.getElementById("model").style.display;
+            if (modelType == 'none') {
+                //document.getElementById("model").style.display = "";
+                loadModelDatagrid('first');
+                $("#model").css('display', '');
+            }
+            else {
+                //document.getElementById("model").style.display = 'none';
+                $("#model").css('display', 'none');
+            }
+        }
+
+        function loadModelDatagrid(myDIYModelLoadType) {
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                url: "CustomAnalyseItem.asmx/GetModelDatas",
+                data: "{builderId: '1'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (myDIYModelLoadType == 'first') {
+                        m_MsgData = jQuery.parseJSON(msg.d);
+                        myDIYModelLoadType = 'last';
+                        InitializeModeDatagrid(m_MsgData);
+                    }
+                    else if (myDIYModelLoadType == 'last') {
+                        m_MsgData = jQuery.parseJSON(msg.d);
+                        $('#modelDatagrid').datagrid('loadData', m_MsgData);
+                    }
+                }
+            });
+        }
+        function InitializeModeDatagrid(myData) {
+            $('#modelDatagrid').datagrid({
+                data: myData,
+                iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true,
+                columns: [[
+                    { field: 'Name', title: '名称', width: '10%', align: 'center' },
+                    { field: 'Date', title: '创建日期', width: '20%', align: 'center'},
+                    { field: 'Builder', title: '创建人', width: '20%', align: 'center' },
+                    { field: 'Description', title: '模板描述', width: '20%', align: 'center' },
+                    {
+                        field: 'IsPrivate', title: '是否私有', width: '15%', align: 'center',
+                        formatter: function (value) {
+                            if (value == true || value == "True")
+                                return "是";
+                            else if (value == false || value == "False")
+                                return "否";
+                            else
+                                return "";
+                        },
+                        editor: { type: 'checkbox', options: { on: true, off: false } }
+                    },
+                    {
+                        field: 'action', title: '操作', width: '14%', align: 'center',
+                        formatter: function (value, row, index) {
+                            var s = '<a href="#" onclick="loadModel(' + row['ID'] + ')">载入模板</a> ';
+                            return s;
+                        }
+                    }
+                ]]
+            });
+        };
+
+        function loadModel(rowId) {
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                url: "CustomAnalyseItem.asmx/GetModelDatasByModelID",
+                data: "{DIYAnalyseModelID: '" + rowId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                        m_MsgData = jQuery.parseJSON(msg.d);
+                        InitializelabelSelectedList(m_MsgData);
+                }
+            });
+        }
+        function InitializelabelSelectedList(myData) {
+            $('#labelSelectedList').datagrid('loadData', myData);
+        }
+
+        function DIYModel() {
+            $('#dlg').dialog('open');
+        }
+
+    </script>
     <style>
         body {
             font-size: 80%;
@@ -263,8 +356,14 @@
         生产线： <input id="productLineName" class="easyui-combobox"
                         data-options="valueField:'ID',textField:'Name', editable: false,
                                       url:'CustomAnalyseItem.asmx/GetProductLinesWithComboboxFormat'" />
+        <a href="javascript:void(0)" class="easyui-linkbutton" style="width:100px;" onclick="showModelDatagrid()">选择自定义模板</a>
         <!--<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px" onclick="queryProductLine();">查询</a>-->
+        <a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px;" onclick="DIYModel()">自定义模板</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" style="width:80px;float:right;" onclick="submit()">提交</a>  <%--$('#w').window('open');--%>
+    </div>
+    <div id="model" style="width:100%;display:none">
+        <table id="modelDatagrid" class="easyui-datagrid" title="自定义模板" style="width:100%;height:260px; margin-left: 10px;" >
+	    </table>
     </div>
     <div style="width: 49%; float: left;">
         <table id="labelSelector" title="选择分析标签" class="easyui-treegrid" style="width:100%;height:260px;"
@@ -272,7 +371,7 @@
 		    <thead>
 			    <tr>
 				    <th data-options="field:'VariableName', width:220">变量名</th>
-				    <th data-options="field:'FieldName', width:220">标签名</th>
+				    <th data-options="field:'VariableDescription', width:220">标签名</th>
 			    </tr>
 		    </thead>
 	    </table>
@@ -282,22 +381,54 @@
 			    data-options="singleSelect:true,rownumbers: true">
 		    <thead>
 			    <tr>
-                    <th data-options="field:'productLineId',hidden:true"></th>
-				    <th data-options="field:'productLineName',width:100">生产线名称</th>
-				    <th data-options="field:'labelName',width:150">变量名</th>
-				    <th data-options="field:'name',width:150">标签名</th>
+                    <th data-options="field:'ProductLineID',hidden:true"></th>
+				    <th data-options="field:'ProductLineName',width:100">生产线名称</th>
+				    <th data-options="field:'VariableName',width:150">变量名</th>
+				    <th data-options="field:'VariableDescription',width:150">变量描述</th>
 			    </tr>
 		    </thead>
 	    </table>
     </div>
 
-	<div id="w" class="easyui-window" title="过程数据分析" data-options="closed:true" style="width:1000px;height:700px;padding:10px;">
+	<div id="w" class="easyui-window" title="过程数据分析" data-options="closed:true" style="width:900px;height:500px;padding:10px;">
 		<div class="easyui-panel" data-options="region:'north',border:true, collapsible:false, split:false" style="height:45%;">
 		    <table id="grid_ChartMain" data-options="fit:true,border:false"></table>
 	    </div>
         <div id = "chart9" class="easyui-panel" data-options="region:'center',border:false" style="margin-left:20px;padding-right:100px;">
 
 	    </div>
+    </div>
+    <div id="dlg" class="easyui-dialog" title="创建人信息" style="width:400px;height:200px;padding:10px"
+		data-options="
+			iconCls: 'icon-save',
+            closed:true,
+			buttons: [{
+				text:'保存',
+				iconCls:'icon-ok',
+				handler:function(){
+					alert('ok');
+				}
+			},{
+				text:'取消',
+				handler:function(){
+					alert('cancel');
+				}
+			}]
+		">
+	    <table>
+            <tr>
+                <td>模板名称：</td>
+                <td><input id="modelName" type="text" /></td>
+            </tr>
+            <tr>
+                <td>模板描述：</td>
+                <td><textarea id="builderName"></textarea></td>
+            </tr>
+            <tr>
+                <td>是否私有：</td>
+                <td><input id="isPrivate" type="checkbox" value="true" /></td>
+            </tr>
+	    </table>
     </div>
 
     </form>

@@ -6,7 +6,6 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using NXJC.Slim.Service.Infrastructure;
 using System.Collections;
 
 namespace NXJC.UI.Web.ProcessDataAnalyse
@@ -34,7 +33,7 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
             try
             {
                 DataTable labelTable = ProductLineService.GetLabelsByProductLineId(productLineId);
-                return TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", new string[] { "VariableName", "FieldName" });
+                return TreeGridJsonParser.DataTableToJson(labelTable, "ViewName", new string[] { "VariableName", "VariableDescription" });
             }
             catch
             {
@@ -49,13 +48,39 @@ namespace NXJC.UI.Web.ProcessDataAnalyse
             ArrayList productLineAndlableNames = new ArrayList();
             foreach (var item in seletedStrings)
             {
-                string productLineAndlableName = item.JsonPick("labelName");
+                string productLineAndlableName = item.JsonPick("VariableName");
                 productLineAndlableNames.Add(productLineAndlableName);
             }
             CustomAnalyseItemService service = new CustomAnalyseItemService();
             DataTable dt = service.GetProcessDatas(productLineAndlableNames);
 
             string result = DataTable2ChartJson.ToChartJson(dt, "Time", "T", "100");
+
+            return result;
+        }
+
+
+        [WebMethod]
+        public string GetModelDatas(string builderId)
+        {
+            CustomAnalyseItemService service = new CustomAnalyseItemService();
+            DataTable dt = service.GetDIYAnalyseModel();
+            string[] column = {"ID","Name","Date","Builder","Description","IsPrivate"};
+            string result = DataGridJsonParser.DataTableToJson(dt, column);
+
+            return result;
+        }
+
+        [WebMethod]
+        public string GetModelDatasByModelID(string DIYAnalyseModelID)
+        {
+            int id = 0;
+            int.TryParse(DIYAnalyseModelID, out id);
+            CustomAnalyseItemService service = new CustomAnalyseItemService();
+            DataTable dt = service.GetModelDatasByDIYAnalyseModelID(id);
+            string[] column = { "ID", "DIYAnalyseModelID", "ProductLineID", "ProductLineName", "VariableName", "VariableDescription" };
+
+            string result = DataGridJsonParser.DataTableToJson(dt, column);
 
             return result;
         }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MasterConfigureService.cs" />
     <Compile Include="CementTypeConvertCoefficientService.cs" />
     <Compile Include="CustomAnalyseItemService.cs" />
     <Compile Include="ElectricPowerCountService.cs" />

@@ -72,5 +72,34 @@ namespace NXJC.Slim.Service
 
             return dt;
         }
+
+        public DataTable GetDIYAnalyseModel()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM DIYAnalyseModel";
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        public DataTable GetModelDatasByDIYAnalyseModelID(int id)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM DIYModels WHERE DIYAnalyseModelID=" + id;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
     }
 }

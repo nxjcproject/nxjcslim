@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditFengGuPing.aspx.cs" Inherits="NXJC.UI.Web.FengGuPing.EditFengGuPing" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MasterConfigure.aspx.cs" Inherits="NXJC.UI.Web.MasterAlarm.MasterConfigure" %>
 
 <!DOCTYPE html>
 
@@ -13,9 +13,11 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            loadMasterData();
             loadGridData('first');
         });
 
+        var masterData;
         var m_MsgData;
         var editIndex = undefined;
 
@@ -58,18 +60,42 @@
             }
         }
 
+        function loadMasterData() {
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                url: "MasterConfigure.asmx/GetmastersDatas",
+                data: "{ProductLineID: '1'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    masterData = jQuery.parseJSON(msg.d);
+                }
+            });
+        }
+
+        function comboboxFormatter(value) {
+            if (value == 0 || value == "")
+                return;
+
+            for (var i = 0; i < masterData.length; i++) {
+                if (masterData[i].VariableName == value)
+                    return masterData[i].EquipmentName;
+            }
+        }
+
         function loadGridData(myLoadType) {
 
             //parent.$.messager.progress({ text: '数据加载中....' });
             $.ajax({
                 type: "POST",
-                url: "EditFengGuPing.asmx/GetFGPValueForGrid",
-                data: "{companyId: '1'}",
+                url: "MasterConfigure.asmx/GetAlarmConfigureDatas",
+                data: "{ProductLineID: '1'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
                     if (myLoadType == 'first') {
-                        myLoadType = 'last';
+                        myLoadType == 'last';
                         m_MsgData = jQuery.parseJSON(msg.d);
                         InitializeGrid(m_MsgData);
                     }
@@ -86,53 +112,94 @@
                 data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
-                    { field: 'GroupID', title: '组号', width: '10%', align: 'center', editor: { type: 'numberbox', options: { precision: 0 } } },
-                    { field: 'StartTime', title: '起始时间', width:'20%', align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
-                    { field: 'EndTime', title: '终止时间', width:'20%', align: 'center', editor: { type: 'timespinner', options: { showSeconds: true } } },
+                    { field: 'EquipmentName', title: '设备名称', width: '20%', align: 'center', editor: 'text' },
                     {
-                        field: 'Type', title: '类型', width:'20%', align: 'center',
+                        field: 'Ismaster', title: '主机标志', width: '6%', align: 'center',
                         formatter: function (value) {
-                            if (value == 0)
-                                return '峰';
-                            else if (value == 1)
-                                return '谷';
-                            else if (value == 2)
-                                return '平';
+                            if (value == 'True')
+                                return '主机';
+                            else if (value == 'False' || value == '')
+                                return '从机';
                             else
                                 return '';
                         },
                         editor: {
-                            type: 'combobox',
+                            type: 'checkbox',
                             options: {
-                                valueField: 'value',
-                                textField: 'label',
-                                data: [{
-                                    label: '峰',
-                                    value: 0
-                                },{
-                                    label: '谷',
-                                    value: 1
-                                }, {
-                                    label: '平',
-                                    value: 2
-                                }]
+                                on: 'True',
+                                off: 'False'
                             }
                         }
                     },
                     {
-                        field: 'Flag', title: '启用标志', width:'15%', align: 'center',
-                        formatter: function (value) {
-                            if (value == true || value == "true")
-                                return "启用";
-                            else if (value == false || value == "false")
-                                return "禁用";
-                            else
-                                return "";
-                        },
-                        editor: { type: 'checkbox', options: { on: true, off: false } }
+                        field: 'Belong', title: '所属主机', width: '20%', align: 'center',
+                        formatter: comboboxFormatter,
+                        editor: {
+                            type: 'combobox',
+                            options: {
+                                data:masterData,
+                                valueField: 'VariableName',
+                                textField: 'EquipmentName'
+                            }
+                        }
                     },
                     {
-                        field: 'action', title: '操作', width:'14%', align: 'center',
+                        field: 'IsAlarm', title: '报警标志', width: '6%', align: 'center',
+                        formatter: function (value) {
+                            if (value == 'True')
+                                return '1';
+                            else if (value == 'False')
+                                return '0';
+                            else
+                                return '';
+                        },
+                        editor: {
+                            type: 'checkbox',
+                            options: {
+                                on: 'True',
+                                off: 'False'
+                            }
+                        }
+                    },
+                    {
+                        field: 'StopPosition', title: '停机位置', width: '6%', align: 'center',
+                        formatter: function (value) {
+                            if (value == 'True')
+                                return '1';
+                            else if (value == 'False')
+                                return '0';
+                            else
+                                return '';
+                        },
+                        editor: {
+                            type: 'checkbox',
+                            options: {
+                                on: 'True',
+                                off: 'False'
+                            }
+                        }
+                    },
+                    {
+                        field: 'AlarmPosition', title: '报警位置', width: '6%', align: 'center',
+                        formatter: function (value) {
+                            if (value == 'True')
+                                return '1';
+                            else if (value == 'False')
+                                return '0';
+                            else
+                                return '';
+                        },
+                        editor: {
+                            type: 'checkbox',
+                            options: {
+                                on: 'True',
+                                off: 'False'
+                            }
+                        }
+                    },
+                    { field: 'AlarmMessage', title: '报警信息', width: '20%', align: 'center', editor: 'text' },
+                    {
+                        field: 'action', title: '操作', width: '14%', align: 'center',
                         formatter: function (value, row, index) {
                             var s = '<a href="#" onclick="deleteItem(' + index + ')">删除</a> ';
                             return s;
