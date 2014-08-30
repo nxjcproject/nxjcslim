@@ -1,4 +1,5 @@
 ﻿using NXJC.Slim.Service.Infrastructure;
+using NXJC.Slim.Service.Infrastructure.Configuration;
 using SqlServerDataAdapter;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,13 @@ namespace NXJC.Slim.Service
             ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
             Query query = new Query("ContrastTable");
 
-            return factory.Query(query);
+            DataTable dt = factory.Query(query);
+            foreach (DataRow row in dt.Rows)
+            {
+                row["ViewName"] = ViewsDictionary.Current.GetChineseSafely(row["ViewName"].ToString().Trim());
+            }
+
+            return dt;
         }
 
     }
