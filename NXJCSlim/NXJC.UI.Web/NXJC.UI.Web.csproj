@@ -136,6 +136,8 @@
     <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="KPI\KPIMaintain.asmx" />
     <Content Include="KPI\KPIMaintain.aspx" />
+    <Content Include="MasterAlarm\MasterConfigure.asmx" />
+    <Content Include="MasterAlarm\MasterConfigure.aspx" />
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
@@ -492,6 +494,7 @@
     <Content Include="Scripts\ealib\themes\metro\tree.css" />
     <Content Include="Scripts\ealib\themes\metro\validatebox.css" />
     <Content Include="Scripts\ealib\themes\metro\window.css" />
+    <Content Include="Scripts\EasyUITemplate.js" />
     <Content Include="Scripts\extlib\themes\images\alipay.jpg" />
     <Content Include="Scripts\extlib\themes\images\blue_face\bluefaces_01.png" />
     <Content Include="Scripts\extlib\themes\images\blue_face\bluefaces_02.png" />
@@ -2123,6 +2126,17 @@
     </Compile>
     <Compile Include="KPI\KPIMaintain.aspx.designer.cs">
       <DependentUpon>KPIMaintain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAlarm\MasterConfigure.asmx.cs">
+      <DependentUpon>MasterConfigure.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MasterAlarm\MasterConfigure.aspx.cs">
+      <DependentUpon>MasterConfigure.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAlarm\MasterConfigure.aspx.designer.cs">
+      <DependentUpon>MasterConfigure.aspx</DependentUpon>
     </Compile>
     <Compile Include="MeterDataAnalyse\CustomAnalyseItem.aspx.cs">
       <DependentUpon>CustomAnalyseItem.aspx</DependentUpon>
