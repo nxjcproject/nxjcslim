@@ -122,6 +122,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="EasyUIDataGrid\EasyUIDataGridTemplate.js" />
+    <Content Include="EnergyData\Company.aspx" />
+    <Content Include="EnergyData\ConsumptionAppearance.aspx" />
+    <Content Include="EnergyData\EnergyConsumptionMap.aspx" />
+    <Content Include="EnergyData\TechnologicalProcess.aspx" />
     <Content Include="EnergyEfficiency\FormulaService.asmx" />
     <Content Include="EnergyEfficiency\FormulaEditor.aspx" />
     <Content Include="EnergyEfficiency\FormulaGroups.aspx" />
@@ -132,6 +136,9 @@
     <Content Include="FractionalElectricPowerCount\Daily.aspx" />
     <Content Include="HaltReason\MachineHaltReason.asmx" />
     <Content Include="HaltReason\MachineHaltReason.aspx" />
+    <Content Include="Images\ConsumptionAppearance.jpg" />
+    <Content Include="Images\Map.JPG" />
+    <Content Include="Images\TechnologicalProcess.jpg" />
     <Content Include="KPI\CustomKPI.aspx" />
     <Content Include="FengGuPing\EditFengGuPing.aspx" />
     <Content Include="KPI\KPIMaintain.asmx" />
@@ -139,6 +146,23 @@
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding1\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding1\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding2\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding2\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding3\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding3\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding4\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\CementGrinding4\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\CoalMill\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\CoalMill\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\GrateCooler\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\GrateCooler\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\Kiln\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\Kiln\template.jpg" />
+    <Content Include="Monitoring\PowerEquipment\Template\RawMill\template.html" />
+    <Content Include="Monitoring\PowerEquipment\Template\RawMill\template.jpg" />
+    <Content Include="Monitoring\Realtime.aspx" />
     <Content Include="NXJCReport\CementConsumptionYearly.aspx" />
     <Content Include="NXJCReport\CementMillConsumptionMonthly.aspx" />
     <Content Include="NXJCReport\ClinkerConsumptionYearly.aspx" />
@@ -896,6 +920,34 @@
       <DependentUpon>CementTypeConvertCoefficient.aspx</DependentUpon>
     </Compile>
     <Compile Include="EasyUIDataGrid\DataGridTemplateHelper.cs" />
+    <Compile Include="EnergyData\Company.aspx.cs">
+      <DependentUpon>Company.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyData\Company.aspx.designer.cs">
+      <DependentUpon>Company.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnergyData\ConsumptionAppearance.aspx.cs">
+      <DependentUpon>ConsumptionAppearance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyData\ConsumptionAppearance.aspx.designer.cs">
+      <DependentUpon>ConsumptionAppearance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnergyData\EnergyConsumptionMap.aspx.cs">
+      <DependentUpon>EnergyConsumptionMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyData\EnergyConsumptionMap.aspx.designer.cs">
+      <DependentUpon>EnergyConsumptionMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnergyData\TechnologicalProcess.aspx.cs">
+      <DependentUpon>TechnologicalProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyData\TechnologicalProcess.aspx.designer.cs">
+      <DependentUpon>TechnologicalProcess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EnergyEfficiency\FormulaService.asmx.cs">
       <DependentUpon>FormulaService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -999,6 +1051,13 @@
     </Compile>
     <Compile Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx.designer.cs">
       <DependentUpon>ProcessEnergyRealtimeDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoring\Realtime.aspx.cs">
+      <DependentUpon>Realtime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Monitoring\Realtime.aspx.designer.cs">
+      <DependentUpon>Realtime.aspx</DependentUpon>
     </Compile>
     <Compile Include="NXJCReport\CementConsumptionYearly.aspx.cs">
       <DependentUpon>CementConsumptionYearly.aspx</DependentUpon>
@@ -1129,7 +1188,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SystemData\treegrid_data1.htm" />
