@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="EnergyConsumptionService.cs" />
     <Compile Include="Infrastructure\ViewsDictionary.cs" />
+    <Compile Include="DCSAlarmService.cs" />
     <Compile Include="MasterConfigureService.cs" />
     <Compile Include="CementTypeConvertCoefficientService.cs" />
     <Compile Include="CustomAnalyseItemService.cs" />
