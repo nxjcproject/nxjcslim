@@ -24,7 +24,7 @@ namespace NXJC.Slim.Service
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"SELECT	FormulaGroup.Name, table_ElectricPowerCount.FormulaGroupID
+                command.CommandText = @"SELECT DISTINCT	FormulaGroup.Name, table_ElectricPowerCount.FormulaGroupID
                                         FROM    FormulaGroup INNER JOIN
                                                 table_ElectricPowerCount ON FormulaGroup.KeyID = table_ElectricPowerCount.FormulaGroupID
                                         WHERE   table_ElectricPowerCount.FormulaGroupID IN (

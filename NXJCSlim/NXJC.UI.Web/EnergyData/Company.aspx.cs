@@ -34,7 +34,7 @@ namespace NXJC.UI.Web.EnergyData
 
             foreach (var key in dictionary.Keys)
             {
-                Label label = (Label)this.Page.FindControl(key);
+                TextBox label = (TextBox)this.Page.FindControl(key);
                 if (label == null)
                     continue;
 

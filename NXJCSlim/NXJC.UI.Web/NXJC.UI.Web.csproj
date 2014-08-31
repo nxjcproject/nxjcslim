@@ -122,6 +122,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="EasyUIDataGrid\EasyUIDataGridTemplate.js" />
+    <Content Include="EnergyConsumptionAlarm\Configuration.aspx" />
+    <Content Include="EnergyConsumptionAlarm\EnergyConsumptionAlarmService.asmx" />
     <Content Include="EnergyData\Company.aspx" />
     <Content Include="EnergyData\ConsumptionAppearance.aspx" />
     <Content Include="EnergyData\EnergyConsumptionMap.aspx" />
@@ -148,6 +150,9 @@
     <Content Include="MeterDataAnalyse\CustomAnalyseItem.aspx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.asmx" />
     <Content Include="MeterDataDisplay\ProcessEnergyRealtimeDisplay.aspx" />
+    <Content Include="Monitoring\Ammeter\Lanshan\dianbiao.htm" />
+    <Content Include="Monitoring\Ammeter\Nindong\dianbiao2.htm" />
+    <Content Include="Monitoring\Ammeter\YiFenChang\dianbiao3.htm" />
     <Content Include="Monitoring\PowerEquipment\Template\CementGrinding1\template.html" />
     <Content Include="Monitoring\PowerEquipment\Template\CementGrinding1\template.jpg" />
     <Content Include="Monitoring\PowerEquipment\Template\CementGrinding2\template.html" />
@@ -2065,6 +2070,17 @@
       <DependentUpon>CementTypeConvertCoefficient.aspx</DependentUpon>
     </Compile>
     <Compile Include="EasyUIDataGrid\DataGridTemplateHelper.cs" />
+    <Compile Include="EnergyConsumptionAlarm\Configuration.aspx.cs">
+      <DependentUpon>Configuration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnergyConsumptionAlarm\Configuration.aspx.designer.cs">
+      <DependentUpon>Configuration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EnergyConsumptionAlarm\EnergyConsumptionAlarmService.asmx.cs">
+      <DependentUpon>EnergyConsumptionAlarmService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EnergyData\Company.aspx.cs">
       <DependentUpon>Company.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

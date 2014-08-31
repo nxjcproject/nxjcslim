@@ -31,13 +31,13 @@ namespace NXJC.UI.Web.EnergyData {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// YFC 控件。
+        /// Label2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFC;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// YFCZGL 控件。
@@ -46,16 +46,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCZGL;
-        
-        /// <summary>
-        /// Label40 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label40;
+        protected global::System.Web.UI.WebControls.TextBox YFCZGL;
         
         /// <summary>
         /// YFCZDH 控件。
@@ -64,16 +55,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCZDH;
-        
-        /// <summary>
-        /// Label62 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label62;
+        protected global::System.Web.UI.WebControls.TextBox YFCZDH;
         
         /// <summary>
         /// YFCSLZHDH 控件。
@@ -82,16 +64,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCSLZHDH;
-        
-        /// <summary>
-        /// Label76 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label76;
+        protected global::System.Web.UI.WebControls.TextBox YFCSLZHDH;
         
         /// <summary>
         /// YFCSLZHMH 控件。
@@ -100,16 +73,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCSLZHMH;
-        
-        /// <summary>
-        /// Label83 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label83;
+        protected global::System.Web.UI.WebControls.TextBox YFCSLZHMH;
         
         /// <summary>
         /// YFCSLZHNH 控件。
@@ -118,16 +82,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCSLZHNH;
-        
-        /// <summary>
-        /// Label87 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label87;
+        protected global::System.Web.UI.WebControls.TextBox YFCSLZHNH;
         
         /// <summary>
         /// YFCSNZHDH 控件。
@@ -136,16 +91,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCSNZHDH;
-        
-        /// <summary>
-        /// Label91 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label91;
+        protected global::System.Web.UI.WebControls.TextBox YFCSNZHDH;
         
         /// <summary>
         /// YFCSNZHMH 控件。
@@ -154,16 +100,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCSNZHMH;
-        
-        /// <summary>
-        /// Label93 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label93;
+        protected global::System.Web.UI.WebControls.TextBox YFCSNZHMH;
         
         /// <summary>
         /// YFCSNZHNH 控件。
@@ -172,16 +109,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCSNZHNH;
-        
-        /// <summary>
-        /// Label95 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label95;
+        protected global::System.Web.UI.WebControls.TextBox YFCSNZHNH;
         
         /// <summary>
         /// YFCYRFD 控件。
@@ -190,34 +118,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label YFCYRFD;
-        
-        /// <summary>
-        /// Label97 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label97;
-        
-        /// <summary>
-        /// ND 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ND;
-        
-        /// <summary>
-        /// NDZGL 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NDZGL;
+        protected global::System.Web.UI.WebControls.TextBox YFCYRFD;
         
         /// <summary>
         /// Label3 控件。
@@ -229,22 +130,22 @@ namespace NXJC.UI.Web.EnergyData {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
+        /// NDZGL 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NDZGL;
+        
+        /// <summary>
         /// NDZDH 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NDZDH;
-        
-        /// <summary>
-        /// Label5 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.TextBox NDZDH;
         
         /// <summary>
         /// NDSNZHDH 控件。
@@ -253,16 +154,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NDSNZHDH;
-        
-        /// <summary>
-        /// Label13 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
+        protected global::System.Web.UI.WebControls.TextBox NDSNZHDH;
         
         /// <summary>
         /// NDSNZHMH 控件。
@@ -271,16 +163,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NDSNZHMH;
-        
-        /// <summary>
-        /// Label15 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
+        protected global::System.Web.UI.WebControls.TextBox NDSNZHMH;
         
         /// <summary>
         /// NDSNZHNH 控件。
@@ -289,52 +172,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NDSNZHNH;
-        
-        /// <summary>
-        /// Label17 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
-        
-        /// <summary>
-        /// LS 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LS;
-        
-        /// <summary>
-        /// LSZGL 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSZGL;
-        
-        /// <summary>
-        /// Label2 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// LSZDH 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSZDH;
+        protected global::System.Web.UI.WebControls.TextBox NDSNZHNH;
         
         /// <summary>
         /// Label4 控件。
@@ -346,22 +184,31 @@ namespace NXJC.UI.Web.EnergyData {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
+        /// LSZGL 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LSZGL;
+        
+        /// <summary>
+        /// LSZDH 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LSZDH;
+        
+        /// <summary>
         /// LSSLZHDH 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSSLZHDH;
-        
-        /// <summary>
-        /// Label6 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.TextBox LSSLZHDH;
         
         /// <summary>
         /// LSSLZHMH 控件。
@@ -370,16 +217,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSSLZHMH;
-        
-        /// <summary>
-        /// Label7 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.TextBox LSSLZHMH;
         
         /// <summary>
         /// LSSLZHNH 控件。
@@ -388,16 +226,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSSLZHNH;
-        
-        /// <summary>
-        /// Label8 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.TextBox LSSLZHNH;
         
         /// <summary>
         /// LSSNZHDH 控件。
@@ -406,16 +235,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSSNZHDH;
-        
-        /// <summary>
-        /// Label9 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.TextBox LSSNZHDH;
         
         /// <summary>
         /// LSSNZHMH 控件。
@@ -424,16 +244,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSSNZHMH;
-        
-        /// <summary>
-        /// Label10 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
+        protected global::System.Web.UI.WebControls.TextBox LSSNZHMH;
         
         /// <summary>
         /// LSSNZHNH 控件。
@@ -442,16 +253,7 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSSNZHNH;
-        
-        /// <summary>
-        /// Label11 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
+        protected global::System.Web.UI.WebControls.TextBox LSSNZHNH;
         
         /// <summary>
         /// LSYRFD 控件。
@@ -460,15 +262,6 @@ namespace NXJC.UI.Web.EnergyData {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LSYRFD;
-        
-        /// <summary>
-        /// Label12 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
+        protected global::System.Web.UI.WebControls.TextBox LSYRFD;
     }
 }
