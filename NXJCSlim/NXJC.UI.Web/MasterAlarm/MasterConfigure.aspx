@@ -9,14 +9,26 @@
     <link href="/Scripts/EasyUI/themes/icon.css" rel="stylesheet" />
     <script src="/Scripts/EasyUI/jquery.min.js"></script>
     <script src="/Scripts/EasyUI/jquery.easyui.min.js"></script>
-    <title></title>
+    <title></title>  
+</head>
+<body>
+    <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:auto">
+	</table>
+    <div id="tb" style="padding:5px;height:auto">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">添加</a>
+	    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="deleteItem()">删除</a>
+	    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="saveItem()">保存</a>
+    </div>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
             loadMasterData();
+            loadEquipmentData();
             loadGridData('first');
         });
 
+        var equipmentData;
         var masterData;
         var m_MsgData;
         var editIndex = undefined;
@@ -60,10 +72,26 @@
             }
         }
 
+        function loadEquipmentData() {
+            //parent.$.messager.progress({ text: '数据加载中....' });
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "MasterConfigure.asmx/GetEquipmentDatas",
+                data: "{ProductLineID: '1'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    equipmentData = jQuery.parseJSON(msg.d);
+                }
+            });
+        }
+
         function loadMasterData() {
             //parent.$.messager.progress({ text: '数据加载中....' });
             $.ajax({
                 type: "POST",
+                async: false,
                 url: "MasterConfigure.asmx/GetmastersDatas",
                 data: "{ProductLineID: '1'}",
                 contentType: "application/json; charset=utf-8",
@@ -74,13 +102,33 @@
             });
         }
 
-        function comboboxFormatter(value) {
+        function belongComboboxFormatter(value) {
             if (value == 0 || value == "")
                 return;
 
             for (var i = 0; i < masterData.length; i++) {
                 if (masterData[i].VariableName == value)
                     return masterData[i].EquipmentName;
+            }
+        }
+        function equipmentNameComboboxFormatter(value) {
+            if (value == 0 || value == "")
+                return;
+
+            for (var i = 0; i < equipmentData.length; i++) {
+                if (equipmentData[i].VariableName == value)
+                    return equipmentData[i].EquipmentName;
+            }
+        }
+
+        function selectEquipmentCombobox() {
+            if (editIndex == undefined) { return true }
+            if ($('#dg').datagrid('validateRow', editIndex)) {
+                var ed = $('#dg').datagrid('getEditor', { index: editIndex, field: 'VariableName' });
+                var equipmentName = $(ed.target).combobox('getText');
+                $('#dg').datagrid('getRows')[editIndex]['EquipmentName'] = equipmentName;
+                $('#dg').datagrid('endEdit', editIndex);
+                editIndex = undefined;
             }
         }
 
@@ -93,9 +141,10 @@
                 data: "{ProductLineID: '1'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                //async: false,//取消异步请求
                 success: function (msg) {
                     if (myLoadType == 'first') {
-                        myLoadType == 'last';
+                        myLoadType = 'last';
                         m_MsgData = jQuery.parseJSON(msg.d);
                         InitializeGrid(m_MsgData);
                     }
@@ -109,10 +158,21 @@
         function InitializeGrid(myData) {
 
             $('#dg').datagrid({
-                data: myData,
                 iconCls: 'icon-edit', singleSelect: true, rownumbers: true, striped: true, onClickCell: onClickCell, toolbar: '#tb',
                 columns: [[
-                    { field: 'EquipmentName', title: '设备名称', width: '20%', align: 'center', editor: 'text' },
+                    {
+                        field: 'VariableName', title: '标签名', width: '10%', align: 'center',
+                        editor: {
+                            type: 'combobox',
+                            options: {
+                                data: equipmentData,
+                                valueField: 'VariableName',
+                                textField: 'EquipmentName',
+                                onSelect: selectEquipmentCombobox
+                            }
+                        }
+                    },
+                    { field: 'EquipmentName', title: '设备名称', width: '10%', align: 'center' },
                     {
                         field: 'Ismaster', title: '主机标志', width: '6%', align: 'center',
                         formatter: function (value) {
@@ -133,11 +193,11 @@
                     },
                     {
                         field: 'Belong', title: '所属主机', width: '20%', align: 'center',
-                        formatter: comboboxFormatter,
+                        formatter: belongComboboxFormatter,
                         editor: {
                             type: 'combobox',
                             options: {
-                                data:masterData,
+                                data: masterData,
                                 valueField: 'VariableName',
                                 textField: 'EquipmentName'
                             }
@@ -205,9 +265,11 @@
                             return s;
                         }
                     }
-                ]]
+                ]],
+                data: myData,
             });
         }
+
 
         function addItem() {
             $('#dg').datagrid('appendRow', {});
@@ -267,14 +329,5 @@
             //$('#tt').datagrid('acceptChanges');
         }
     </script>
-</head>
-<body>
-    <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:auto">
-	</table>
-    <div id="tb" style="padding:5px;height:auto">
-        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addItem()">添加</a>
-	    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="deleteItem()">删除</a>
-	    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="saveItem()">保存</a>
-    </div>
 </body>
 </html>

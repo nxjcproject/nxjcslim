@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AlarmLog\DCSAlarm.asmx" />
+    <Content Include="AlarmLog\DCSAlarm.aspx" />
     <Content Include="CementType\CementTypeConvertCoefficient.asmx" />
     <Content Include="CementType\CementTypeConvertCoefficient.aspx" />
     <Content Include="Content\Site.css" />
@@ -2053,6 +2055,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmLog\DCSAlarm.asmx.cs">
+      <DependentUpon>DCSAlarm.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AlarmLog\DCSAlarm.aspx.cs">
+      <DependentUpon>DCSAlarm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlarmLog\DCSAlarm.aspx.designer.cs">
+      <DependentUpon>DCSAlarm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CementType\CementTypeConvertCoefficient.asmx.cs">
       <DependentUpon>CementTypeConvertCoefficient.asmx</DependentUpon>
       <SubType>Component</SubType>

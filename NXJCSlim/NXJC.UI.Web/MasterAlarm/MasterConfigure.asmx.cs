@@ -20,6 +20,21 @@ namespace NXJC.UI.Web.MasterAlarm
     public class MasterConfigure1 : System.Web.Services.WebService
     {
         [WebMethod]
+        public string GetEquipmentDatas(string ProductLineID)
+        {
+            int id = 0;
+            int.TryParse(ProductLineID, out id);
+
+            MasterConfigureService service = new MasterConfigureService();
+            DataTable dt = service.GetEquipment(id);
+
+            string[] column = { "VariableName", "EquipmentName" };
+            string result = ComboboxJsonParser.DataTableToJson(dt, column);
+
+            return result;
+        }
+
+        [WebMethod]
         public string GetmastersDatas(string ProductLineID)
         {
             int id = 0;
@@ -44,7 +59,7 @@ namespace NXJC.UI.Web.MasterAlarm
 
             DataTable dt = service.GetAlarmConfigure(id);
 
-            string[] column = { "EquipmentName", "Ismaster", "Belong", "IsAlarm", "StopPosition", "AlarmPosition", "AlarmMessage" };
+            string[] column = { "VariableName", "EquipmentName", "Ismaster", "Belong", "IsAlarm", "StopPosition", "AlarmPosition", "AlarmMessage" };
             string result = DataGridJsonParser.DataTableToJson(dt, column);
 
             return result;
